@@ -1,20 +1,14 @@
-// TREBALL EN GRUP | ALEX | DENIS | JAVI
-
 package com.biblioteca;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void limpiarPantalla(){
-        for (int i = 0; i < 50; i++){
-            System.out.println();
-        }
-    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int optMain = 0;
 
-        // Mostrar el menu por consola
+        // Mostrar el menu per consola
         do {
             System.out.println("Gestió de biblioteca\n1. Llibres" +
                               "\n2. Usuaris" +
@@ -31,16 +25,16 @@ public class Main {
                         menuLibros(scanner);
                         break;
                     case 2:
-
+                        // Aquí podries afegir la gestió d'usuaris
                         break;
                     case 3:
-
+                        // Aquí podries afegir la gestió de préstecs
                         break;
                     case 0:
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no válida. Torna-ho a intentar.\n");
+                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
                 }
             } else {
                 System.out.println("Si us plau, ingressa un número vàlid.\n ");
@@ -50,10 +44,17 @@ public class Main {
         } while (optMain != 0);
                 
         scanner.close();
-            
     }
 
-    public static void menuLibros(Scanner scanner){
+    // Funció per netejar la pantalla
+    public static void limpiarPantalla() {
+        for (int i = 0; i < 50; i++){
+            System.out.println();
+        }
+    }
+
+    // Menú de gestió de llibres
+    public static void menuLibros(Scanner scanner) {
         int optLibros;
 
         do {
@@ -68,13 +69,13 @@ public class Main {
 
                 switch (optLibros) {
                     case 1:
-                        
+                        // Afegir llibre
                         break;
                     case 2:
-
+                        // Modificar llibre
                         break;
                     case 3:
-
+                        // Eliminar llibre
                         break;
                     case 4:
                         limpiarPantalla();
@@ -84,7 +85,7 @@ public class Main {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no válida. Torna-ho a intentar.\n");
+                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
                 }
             } else {
                 System.out.println("Si us plau, ingressa un número vàlid.\n");
@@ -94,7 +95,8 @@ public class Main {
         } while (optLibros != 0);
     }
 
-    public static void menuListarLibros(Scanner scanner){
+    // Menú per llistar llibres
+    public static void menuListarLibros(Scanner scanner) {
         int optListarLibros;
 
         do {
@@ -109,22 +111,22 @@ public class Main {
 
                 switch (optListarLibros) {
                     case 1:
-                        
+                        // Llistar tots els llibres
                         break;
                     case 2:
-
+                        // Llistar llibres en préstec
                         break;
                     case 3:
-
+                        // Llistar per autor
                         break;
                     case 4:
-
+                        // Cercar títol
                         break;
                     case 0:
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no válida. Torna-ho a intentar.\n");
+                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
                 }
             } else {
                 System.out.println("Si us plau, ingressa un número vàlid.\n");
@@ -134,5 +136,3 @@ public class Main {
         } while (optListarLibros != 0);
     }
 }
-
-
