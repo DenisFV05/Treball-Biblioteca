@@ -26,7 +26,7 @@ public class Main {
                 // Guardem les dades del llibre
                 int id = llibre.getInt("id");
                 String titol = llibre.getString("titol");
-                String autor = llibre.getString("autor");
+                JSONArray autor = llibre.getJSONArray("autor");
 
                 // Mostrem les dades del llibre
                 if (i == 0){
@@ -34,7 +34,15 @@ public class Main {
                 }
                 System.out.println("ID: " + id);
                 System.out.println("TITOL: " + titol);
-                System.out.println("AUTOR: " + autor);
+                System.out.print("AUTOR: ");
+                for (int j = 0; j < autor.length(); j++){
+                    if (j != 0){
+                        System.out.print(" / " + autor.getString(j));
+                    }else{
+                        System.out.print(autor.getString(j));
+                    }
+                }
+                System.out.println("");
                 if (i == (llibres.length() - 1)){
                     System.out.println();
                 } else {
