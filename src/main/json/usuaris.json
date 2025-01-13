@@ -1,92 +1,92 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "nom": "Alejandro",
         "cognoms": "Morales Casado",
-        "telefon": "654321987"
+        "telefon": 654321987
     },
     {
-        "id": "2",
+        "id": 2,
         "nom": "Irene",
         "cognoms": "Fernandez Lozano",
-        "telefon": "612345678"
+        "telefon": 612345678
     },
     {
-        "id": "3",
+        "id": 3,
         "nom": "Javier",
         "cognoms": "Martinez Lopez",
-        "telefon": "678123456"
+        "telefon": 678123456
     },
     {
-        "id": "4",
+        "id": 4,
         "nom": "Lucia",
         "cognoms": "Sanchez Marin",
-        "telefon": "651234987"
+        "telefon": 651234987
     },
     {
-        "id": "5",
+        "id": 5,
         "nom": "Ruben",
         "cognoms": "Hernandez Pardo",
-        "telefon": "620987654"
+        "telefon": 620987654
     },
     {
-        "id": "6",
+        "id": 6,
         "nom": "Sara",
         "cognoms": "Navarro Ortega",
-        "telefon": "699876543"
+        "telefon": 699876543
     },
     {
-        "id": "7",
+        "id": 7,
         "nom": "Mario",
         "cognoms": "Gonzalez Guerra",
-        "telefon": "690123987"
+        "telefon": 690123987
     },
     {
-        "id": "8",
+        "id": 8,
         "nom": "Marc",
         "cognoms": "Cachinero Romero",
-        "telefon": "600456789"
+        "telefon": 600456789
     },
     {
-        "id": "9",
+        "id": 9,
         "nom": "Pablo",
         "cognoms": "Vega Cano",
-        "telefon": "610987123"
+        "telefon": 610987123
     },
     {
-        "id": "10",
+        "id": 10,
         "nom": "Elena",
         "cognoms": "Castillo Soria",
-        "telefon": "611234789"
+        "telefon": 611234789
     },
     {
-        "id": "11",
+        "id": 11,
         "nom": "Hugo",
         "cognoms": "Alvarez Montes",
-        "telefon": "629876321"
+        "telefon": 629876321
     },
     {
-        "id": "12",
+        "id": 12,
         "nom": "Paula",
         "cognoms": "Conesa Cerezo",
-        "telefon": "647890123"
+        "telefon": 647890123
     },
     {
-        "id": "13",
+        "id": 13,
         "nom": "Alvaro",
         "cognoms": "Lorenzo Pena",
         "telefon": "600123654"
     },
     {
-        "id": "14",
+        "id": 14,
         "nom": "Nuria",
         "cognoms": "Reyes Moreno",
-        "telefon": "671234876"
+        "telefon": 671234876
     },
     {
-        "id": "15",
+        "id": 15,
         "nom": "Raul",
         "cognoms": "Fuentes Serrano",
-        "telefon": "680987345"
+        "telefon": 680987345
     }
 ]
