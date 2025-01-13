@@ -2,76 +2,76 @@
     {
         "id": 1,
         "titol": "Don Quijote de la Mancha",
-        "autor": ["Miguel de Cervantes"]
+        "autor": "Miguel de Cervantes"
     },
     {
         "id": 2,
         "titol": "La sombra del viento",
-        "autor": ["Carlos Ruiz Zafon"]
+        "autor": "Carlos Ruiz Zafon"
     },
     {
         "id": 3,
-        "titol": "El ultimo Caton",
-        "autor": ["Matilde Asensi", "Jesus Asensi"]
+        "titol": "Cien años de soledad",
+        "autor": "Gabriel Garia Marquez"
     },
     {
         "id": 4,
         "titol": "Los renglones torcidos de Dios",
-        "autor": ["Torcuato Luca de Tena"]
+        "autor": "Torcuato Luca de Tena"
     },
     {
         "id": 5,
-        "titol": "El desafio etico: Politica, justicia y paz",
-        "autor": ["Adela Cortina", "Jesus Conill"]
+        "titol": "Fortunata y Jacinta",
+        "autor": "Benito Perez Galdos"
     },
     {
         "id": 6,
         "titol": "La Celestina",
-        "autor": ["Fernando de Rojas"]
+        "autor": "Fernando de Rojas"
     },
     {
         "id": 7,
-        "titol": "Espana invertebrada y otras claves de nuestro tiempo",
-        "autor": ["Fernando Savater", "Jose Antonio Marina"]
+        "titol": "Platero y yo",
+        "autor": "Juan Ramon Jimenez"
     },
     {
         "id": 8,
         "titol": "Patria",
-        "autor": ["Fernando Aramburu"]
+        "autor": "Fernando Aramburu"
     },
     {
         "id": 9,
         "titol": "Nada",
-        "autor": ["Carmen Laforet"]
+        "autor": "Carmen Laforet"
     },
     {
         "id": 10,
-        "titol": "La sonrisa etrusca",
-        "autor": ["Jose Luis Sampedro", "Olga Lucas"]
+        "titol": "El tiempo entre costuras",
+        "autor": "Maria Dueñas"
     },
     {
         "id": 11,
-        "titol": "Rimas y leyendas",
-        "autor": ["Gustavo Adolfo Becquer"]
+        "titol": "Fuenteovejuna",
+        "autor": "Lope de Vega"
     },
     {
         "id": 12,
-        "titol": "Manual del perfecto idiota iberoamericano",
-        "autor": ["Carlos Alberto Montaner", "Placido Arango"]
+        "titol": "Rimas y leyendas",
+        "autor": "Gustavo Adolfo Becquer"
     },
     {
         "id": 13,
         "titol": "El sombrero de tres picos",
-        "autor": ["Pedro Antonio de Alarcon"]
+        "autor": "Pedro Antonio de Alarcon"
     },
     {
         "id": 14,
         "titol": "Tierra de campos",
-        "autor": ["David Trueba"]
+        "autor": "David Trueba"
     },
     {
         "id": 15,
         "titol": "La buena suerte",
-        "autor": ["Rosa Montero"]
+        "autor": "Rosa Montero"
     }
 ]
