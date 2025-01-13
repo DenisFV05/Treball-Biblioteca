@@ -2,17 +2,17 @@
 
 package com.biblioteca;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main {
     public static void main(String[] args) {
         try{
             // Ruta de l'arxiu json llibres
-            String rutaJsonLlibres = "./json/llibres.json";
+            String rutaJsonLlibres = "src/main/json/llibres.json";
             String contingut = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
 
             // Convertim el contingut a un JSONArray
