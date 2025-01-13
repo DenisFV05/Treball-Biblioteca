@@ -30,11 +30,12 @@ public class Main {
 
                 // Mostrem les dades del llibre
                 if (i == 0){
-                    System.out.println("----- LLISTAT DE LLIBRES -----");
+                    System.out.println("-".repeat(38) + "   " + "LLISTAT DE LLIBRES" + "    " + "-".repeat(38));
+                    System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
+                    System.out.println();
+                    System.out.println("-".repeat(100));
                 }
-                System.out.println("ID: " + id);
-                System.out.println("TITOL: " + titol);
-                System.out.print("AUTOR: ");
+                System.out.printf("%-5d | %-45s | ", id, titol);
                 for (int j = 0; j < autor.length(); j++){
                     if (j != 0){
                         System.out.print(" / " + autor.getString(j));
@@ -46,7 +47,7 @@ public class Main {
                 if (i == (llibres.length() - 1)){
                     System.out.println();
                 } else {
-                    System.out.println("------------------------------");
+                    System.out.println("-".repeat(100));
                 }
             }
         } catch (Exception e) {
