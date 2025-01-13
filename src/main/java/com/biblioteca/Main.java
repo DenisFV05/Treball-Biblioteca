@@ -8,10 +8,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int optMain = 0;
 
-        // Mostrar el menu per consola
+        // MENU PRINCIPAL
         do {
             System.out.println("""
-                Gestió de biblioteca
+                -- Gestió de biblioteca --
                 1. Llibres
                 2. Usuaris
                 3. Préstecs
@@ -55,17 +55,19 @@ public class Main {
         }
     }
 
-    // Menú de gestió de llibres
+    // MENU LIBROS
     public static void menuLibros(Scanner scanner) {
         int optLibros;
 
         do {
-            System.out.println("Gestió de llibres\n1. Afegir" +
-                              "\n2. Modificar" +
-                              "\n3. Eliminar" +
-                              "\n4. Llistar" +
-                              "\n0. Tornar al menú principal" +
-                              "\nEscull una opció: ");
+            System.out.println("""
+                -- Gestió de llibres --
+                1. Afegir
+                2. Modificar
+                3. Eliminar
+                4. Llistar
+                0. Tornar al menú principal
+                Escull una opció: """);
             if (scanner.hasNextInt()) {
                 optLibros = scanner.nextInt();
 
@@ -98,17 +100,19 @@ public class Main {
         } while (optLibros != 0);
     }
 
-    // Menú per llistar llibres
+    // MENU PRINCIPAL LISTAR LIBROS
     public static void menuListarLibros(Scanner scanner) {
         int optListarLibros;
 
         do {
-            System.out.println("Llistar Llibres\n1. Tots" +
-                                "\n2. En préstec" +
-                                "\n3. Per autor" +
-                                "\n4. Cercar títol" +
-                                "\n0. Tornar al menú principal" +
-                                "\nEscull una opció: ");
+            System.out.println("""
+                -- Llistar Llibres --
+                1. Tots
+                2. En préstec
+                3. Per autor
+                4. Cercar títol
+                0. Tornar al menú de llibres
+                Escull una opció: """);
             if (scanner.hasNextInt()) {
                 optListarLibros = scanner.nextInt();
 
@@ -139,13 +143,17 @@ public class Main {
         } while (optListarLibros != 0);
     }
 
+    // MENU MODIFICAR LIBROS
     public static void menuModificarLibros(Scanner scanner){
         int optModificarLibros;
 
         do { 
-            System.out.println("Modificar Llibres\n1.Titol" +
-                                "\n2.Autor" +
-                                "\n0. Tornar al menú principal");
+            System.out.println("""
+                -- Modificar Llibres --
+                1. Titol
+                2. Autor
+                0. Tornar al menú de llibres
+                Escull una opció: """);
             if (scanner.hasNextInt()) {
                 optModificarLibros = scanner.nextInt();
 
@@ -170,16 +178,19 @@ public class Main {
         } while (optModificarLibros != 0);
     }
 
+    // MENU USUARIOS
     public static void menuUsuarios(Scanner scanner){
         int optUsuarios;
 
         do { 
-            System.out.println("Gestió d'usuaris\n1. Afegir" +
-                              "\n2. Modificar" +
-                              "\n3. Eliminar" +
-                              "\n4. Llistar" +
-                              "\n0. Tornar al menú principal" +
-                              "\nEscull una opció");
+            System.out.println("""
+                -- Gestió d'usuaris --
+                1. Afegir
+                2. Modificar
+                3. Eliminar
+                4. Llistar
+                0. Tornar al menú principal
+                Escull una opció: """);
             if (scanner.hasNextInt()) {
                 optUsuarios = scanner.nextInt();
 
@@ -195,7 +206,8 @@ public class Main {
 
                         break;
                     case 4:
-
+                        limpiarPantalla();
+                        menuListarUsuaris(scanner);
                         break;
                     case 0:
                         limpiarPantalla();
@@ -211,15 +223,18 @@ public class Main {
         } while (optUsuarios != 0);
     }
 
+    // MENU MODIFICAR USUARIOS
     public static void menuModificarUsuarios(Scanner scanner){
         int optModificarUsuario;
 
         do { 
-            System.out.println("Modificar Usuari\n1. Nom" +
-                                "\n2. Cognoms" +
-                                "\n3. Telèfon" +
-                                "\n0. Tornar al menú principal" +
-                                "\nEscull una opció");
+            System.out.println("""
+                -- Modificar Usuari --
+                1. Nom
+                2. Cognom
+                3. Telèfon
+                0. Tornar al menú d'usuaris
+                Escull una opció: """);
             if (scanner.hasNextInt()){
                 optModificarUsuario = scanner.nextInt();
 
@@ -248,16 +263,17 @@ public class Main {
         } while (optModificarUsuario != 0);
     }
 
+    // MENU MODIFICAR APELLIDOS
     public static void menuModificarCognoms(Scanner scanner) {
         int optListarUsuaris;
 
         do { 
-            System.out.println("Llistar Usuaris\n1. Tots" +
-                                "\n2. Per nom" +
-                                "\n3. Per cognom" +
-                                "\n4. Per telèfon" +
-                                "\n0. Tornar al menú principal" +
-                                "\nEscull una opció: ");
+            System.out.println("""
+                -- Modificar Cognoms --
+                1. Primer cognom
+                2. Segon cognom
+                0. Tornar al menú d'usuaris
+                Escull una opció: """);
             if (scanner.hasNextInt()){
                 optListarUsuaris = scanner.nextInt();
 
@@ -266,12 +282,6 @@ public class Main {
 
                         break;
                     case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
 
                         break;
                     case 0:
@@ -288,17 +298,18 @@ public class Main {
         } while (optListarUsuaris != 0);
     }
 
+    // MENU LISTAR USUARIOS
     public static void menuListarUsuaris (Scanner scanner){
         int optListarLibros;
 
         do {
             System.out.println("""
-                Llistar Llibres
-                1. Tots +
-                2. En préstec +
-                3. Per autor +
-                4. Cercar títol +
-                0. Tornar al menú principal +
+                -- Llistar Usuaris --
+                1. Tots
+                2. Per primer cognom
+                3. Per segon cognom
+                4. Per teléfon
+                0. Tornar al menú d'usuaris
                 Escull una opció: """);
             if (scanner.hasNextInt()) {
                 optListarLibros = scanner.nextInt();
