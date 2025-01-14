@@ -73,5 +73,30 @@
         "idLlibre": 15,
         "titol": "La buena suerte",
         "autor": ["Rosa Montero"]
+    },
+    {   
+        "idLlibre": 16,
+        "titol": "Lola Lolita",
+        "autor": ["Juaking Mango"]
+    },
+    {   
+        "idLlibre": 17,
+        "titol": "Alfonsteca Karateka",
+        "autor": ["Luouise Misse"]
+    },
+    {   
+        "idLlibre": 18,
+        "titol": "Solecito Fresquito",
+        "autor": ["Mariona Cross"]
+    },
+    {   
+        "idLlibre": 19,
+        "titol": "2 Peines",
+        "autor": ["Kiko Mortero"]
+    },
+    {   
+        "idLlibre": 20,
+        "titol": "Mucha Miel",
+        "autor": ["Juaquin Gustamande"]
     }
 ]
