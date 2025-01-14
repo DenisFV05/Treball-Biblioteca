@@ -30,7 +30,8 @@ public class Menu {
                         menuUsuarios(scanner);
                         break;
                     case 3:
-                        // Aquí podrías afegir la gestió de préstecs
+                        limpiarPantalla();
+                        menuPrestecs(scanner);
                         break;
                     case 0:
                         limpiarPantalla();
@@ -340,7 +341,7 @@ public class Menu {
                 
                 switch (optPrestecs) {
                     case 1:
-                        // Funcio agafar un llibre
+                        Prestec.prestecFuncionAgafarNouLlibre(scanner);
                         break;
                     case 2:
                         // Funcio retornar un llibre
