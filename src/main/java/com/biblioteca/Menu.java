@@ -323,4 +323,42 @@ public class Menu {
             }
         } while (optListarLibros != 0);
     }
+
+    public static void menuPrestecs(Scanner scanner){
+        int optPrestecs;
+        
+        do { 
+            System.out.println("""
+                -- Gestionar Préstecs --
+                1. Agafar un nou llibre
+                2. Retornar un llibre
+                3. Eliminar préstec
+                0. Tornar al menú principal
+                    """);
+            if (scanner.hasNextInt()){
+                optPrestecs = scanner.nextInt();
+                
+                switch (optPrestecs) {
+                    case 1:
+                        // Funcio agafar un llibre
+                        break;
+                    case 2:
+                        // Funcio retornar un llibre
+                        break;
+                    case 3:
+                        // Funcio eliminar préstec
+                        break;
+                    case 0:
+                        limpiarPantalla();
+                        break;
+                    default:
+                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                }
+            } else {
+                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                scanner.next();
+                optPrestecs = -1;
+            }
+        } while (optPrestecs != 0);
+    }
 }
