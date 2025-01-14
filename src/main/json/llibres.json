@@ -74,8 +74,30 @@
         "titol": "La buena suerte",
         "autor": "Rosa Montero"
     },
-    {
-        
+    {   
+        "id": 16,
+        "titol": "Lola Lolita",
+        "autor": "Juaking Mango"
+    },
+    {   
+        "id": 17,
+        "titol": "Alfonsteca Karateka",
+        "autor": "Luouise Misse"
+    },
+    {   
+        "id": 18,
+        "titol": "Solecito Fresquito",
+        "autor": "Mariona Cross"
+    },
+    {   
+        "id": 19,
+        "titol": "2 Peines",
+        "autor": "Kiko Mortero"
+    },
+    {   
+        "id": 20,
+        "titol": "Mucha Miel",
+        "autor": "Juaquin Gustamande"
     }
 
 ]
