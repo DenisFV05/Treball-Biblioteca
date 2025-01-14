@@ -1,120 +1,120 @@
 [
     {
-        "id": 1,
+        "idUsuari": 1,
         "nom": "Alejandro",
         "cognoms": "Morales Casado",
         "telefon": 654321987
     },
     {
-        "id": 2,
+        "idUsuari": 2,
         "nom": "Irene",
         "cognoms": "Fernandez Lozano",
         "telefon": 612345678
     },
     {
-        "id": 3,
+        "idUsuari": 3,
         "nom": "Javier",
         "cognoms": "Martinez Lopez",
         "telefon": 678123456
     },
     {
-        "id": 4,
+        "idUsuari": 4,
         "nom": "Lucia",
         "cognoms": "Sanchez Marin",
         "telefon": 651234987
     },
     {
-        "id": 5,
+        "idUsuari": 5,
         "nom": "Ruben",
         "cognoms": "Hernandez Pardo",
         "telefon": 620987654
     },
     {
-        "id": 6,
+        "idUsuari": 6,
         "nom": "Sara",
         "cognoms": "Navarro Ortega",
         "telefon": 699876543
     },
     {
-        "id": 7,
+        "idUsuari": 7,
         "nom": "Mario",
         "cognoms": "Gonzalez Guerra",
         "telefon": 690123987
     },
     {
-        "id": 8,
+        "idUsuari": 8,
         "nom": "Marc",
         "cognoms": "Cachinero Romero",
         "telefon": 600456789
     },
     {
-        "id": 9,
+        "idUsuari": 9,
         "nom": "Pablo",
         "cognoms": "Vega Cano",
         "telefon": 610987123
     },
     {
-        "id": 10,
+        "idUsuari": 10,
         "nom": "Elena",
         "cognoms": "Castillo Soria",
         "telefon": 611234789
     },
     {
-        "id": 11,
+        "idUsuari": 11,
         "nom": "Hugo",
         "cognoms": "Alvarez Montes",
         "telefon": 629876321
     },
     {
-        "id": 12,
+        "idUsuari": 12,
         "nom": "Paula",
         "cognoms": "Conesa Cerezo",
         "telefon": 647890123
     },
     {
-        "id": 13,
+        "idUsuari": 13,
         "nom": "Alvaro",
         "cognoms": "Lorenzo Pena",
         "telefon": "600123654"
     },
     {
-        "id": 14,
+        "idUsuari": 14,
         "nom": "Nuria",
         "cognoms": "Reyes Moreno",
         "telefon": 671234876
     },
     {
-        "id": 15,
+        "idUsuari": 15,
         "nom": "Raul",
         "cognoms": "Fuentes Serrano",
         "telefon": 680987345
     },
     {
-        "id": 16,
+        "idUsuari": 16,
         "nom": "Alex",
         "cognoms":"Bermudez Carmona",
         "telefon": 625128863
     },
     {
-        "id": 17,
+        "idUsuari": 17,
         "nom": "Pablo",
         "cognoms":"Motos Gasoil",
         "telefon": 686530293
     },
     {
-        "id": 18,
+        "idUsuari": 18,
         "nom": "Paula",
         "cognoms": "Paz Guiterrez",
         "telefon": 672083623
     },
     {
-        "id": 19,
+        "idUsuari": 19,
         "nom": "Julia",
         "cognoms": "Montaner Gavín",
         "telefon": 625112932
     },
     {
-        "id": 20,
+        "idUsuari": 20,
         "nom": "Lugo",
         "cognoms": "Besugo Moron",
         "telefon": 629088329

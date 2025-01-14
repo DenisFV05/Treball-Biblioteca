@@ -28,7 +28,19 @@ public class Prestec {
 
             JSONArray jsonArrayLlibres = new JSONArray(contentLlibres);
 
-        /////////////////////////////////// [LISTADO DE USUARIOS Y PODER ESCOGERLO] ///////////////////////////////
+        //////////////////////////////////// [ ITERAR LOS PRESTAMOS Y SU GESTIÓM ] //////////////////////////////////
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+
+                // Dar formato a las variables de los prestamos
+                int id = prestec.getInt("id");
+                int idLlibre = prestec.getInt("idLlibre");
+                int idUsuari = prestec.getInt("idUsuari");
+                String dataPrestec = prestec.getString("dataPrestec");
+                String dataDevolucio = prestec.getString("dataDevolucio");
+            }
+
+        /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
             // Header de la lista de usuarios
             System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
@@ -39,13 +51,13 @@ public class Prestec {
                 JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
 
                 // Dar formato a las variables de los usuarios
-                int id = usuari.getInt("id");
+                int idUsuari = usuari.getInt("idUsuari");
                 String nom = usuari.getString("nom");
                 String cognoms = usuari.getString("cognoms");
                 int telefon = usuari.getInt("telefon");
 
                 // Imprimir los datos de los usuarios
-                System.out.printf("%-6d| %-15s| %-20s| %-10d%n", id, nom, cognoms, telefon);
+                System.out.printf("%-6d| %-15s| %-20s| %-10d%n", idUsuari, nom, cognoms, telefon);
             }
             
             // Solicitar el ID y verificar el Input
@@ -67,10 +79,10 @@ public class Prestec {
             JSONObject usuariSeleccionado = null;
             for (int i = 0; i < jsonArrayUsuaris.length(); i++){
                 JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
-                int id = usuari.getInt("id");
+                int idUsuari = usuari.getInt("idUsuari");
 
                 // Si encuentra el ID escrito en usuari.json
-                if(id == selectUsuariId) {
+                if(idUsuari == selectUsuariId) {
                     // [GUARDADO]
                     usuariSeleccionado = usuari; // Donde se guardara el usuario para mas tarde
                 }
@@ -86,9 +98,34 @@ public class Prestec {
         ///////////////////////////////////// [ LISTAR LIBROS DISPONIBLES] /////////////////////////////////////////////
 
             // Header de la lista de libros disponibles
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
-            System.out.println("--------------------------------------------------------");
+            System.out.println("\nID    | Títol            | Autor");
+            System.out.println("-------------------------------------");
             
+            // Iterar los libros
+            JSONArray idsLibrosPrestados = new JSONArray();
+            for (int i = 0; i < jsonArrayLlibres.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+                int idLibroPrestado = prestec.getInt("idLlibre");
+                idsLibrosPrestados.put(idLibroPrestado); // Guardar el ID de los libros prestados
+            }
+            for (int i = 0; i < jsonArrayLlibres.length(); i++) {
+                // Dar formato a las variables de los usuarios
+                JSONObject llibre = jsonArrayLlibres.getJSONObject(i);
+
+                int idLlibre = llibre.getInt("idLlibre");
+                String titol = llibre.getString("titol");
+                String autor = llibre.getString("autor");
+
+                // Verificar los libros reservaods e imprimir los que no
+                if (!idsLibrosPrestados.toList().contains(idLlibre)) {
+                    System.out.printf("%-6d| %-15s| %-20s", idLlibre,titol,autor);
+                }
+                
+
+                // Solicitar el ID y verificar el Input
+
+            }
+
 
         } catch (Exception e) {
             // Control de manejo de expeciones
