@@ -87,19 +87,21 @@ public class Prestec {
                     usuariSeleccionado = usuari; // Donde se guardara el usuario para mas tarde
                 }
             }
-
             // Si no se encuentra el ID (Mensajes)
             if (usuariSeleccionado == null) {
-                System.out.println("No s'ha trobat l'usuari amb l'ID: " + selectUsuariId);
+                System.out.println("No s'ha trobat l'usuari amb l'ID: " + selectUsuariId + "\n");
+                Menu.menuPrestecs(scanner);
             } else {
-                System.out.println("L'usuari amb ID: " + selectUsuariId + " ha estat seleccionat.\n");
+                String nom = usuariSeleccionado.getString("nom");
+                System.out.println("L'usuari amb ID: " +"["+selectUsuariId+"]"+" "+nom+","+" ha estat seleccionat.");
             }
+            
 
         ///////////////////////////////////// [ LISTAR LIBROS DISPONIBLES] /////////////////////////////////////////////
 
             // Header de la lista de libros disponibles
-            System.out.println("\nID    | Títol            | Autor");
-            System.out.println("-------------------------------------");
+            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("-------------------------------------------------------");
             
             // Iterar los libros
             JSONArray idsLibrosPrestados = new JSONArray();
@@ -118,14 +120,44 @@ public class Prestec {
 
                 // Verificar los libros reservaods e imprimir los que no
                 if (!idsLibrosPrestados.toList().contains(idLlibre)) {
-                    System.out.printf("%-6d| %-15s| %-20s", idLlibre,titol,autor);
+                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autor);
                 }
-                
-
-                // Solicitar el ID y verificar el Input
-
             }
 
+            // Solicitar el ID y verificar el Input
+            int selectLibroId = -1;
+            boolean inputLibroValido = false;
+            while (!inputLibroValido) {
+                System.out.println("\nIntroudeix l'ID d'un llibre per seleccionar-lo: ");
+
+                try {
+                    selectLibroId = scanner.nextInt();
+                    inputLibroValido = true;
+                } catch (Exception e) {
+                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                    scanner.nextLine();
+                }
+            }
+
+            // Buscar el libro en base del ID seleccionado
+            JSONObject llibreSeleccionado = null;
+            for (int i = 0; i < jsonArrayLlibres.length(); i++){
+                JSONObject llibre = jsonArrayLlibres.getJSONObject(i);
+                int idLlibre = llibre.getInt("idLlibre");
+
+                // Si se encuentra el ID escrito en llibres.json
+                if(idLlibre == selectLibroId) {
+                    // [GUARDADO]
+                    llibreSeleccionado = llibre;
+                }
+            }
+            // Si no se encuentra el ID (Mensajes)
+            if (llibreSeleccionado == null){
+                System.out.println("No s'ha trobat el llibre amb l'ID: " + selectLibroId + "\n");
+            } else {
+                String titol = llibreSeleccionado.getString("titol");
+                System.out.println("El llibre amb l'ID: " +"["+selectLibroId+"]"+" "+titol+","+" ha estat seleccionat.");
+            }
 
         } catch (Exception e) {
             // Control de manejo de expeciones
