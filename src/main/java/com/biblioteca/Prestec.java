@@ -2,6 +2,8 @@ package com.biblioteca;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -69,6 +71,7 @@ public class Prestec {
                 try {
                     selectUsuariId = scanner.nextInt();
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
+                    
                 } catch (Exception e) {
                     System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
                     scanner.nextLine();
@@ -159,10 +162,62 @@ public class Prestec {
                 System.out.println("El llibre amb l'ID: " +"["+selectLibroId+"]"+" "+titol+","+" ha estat seleccionat.");
             }
 
+            ///////////////////////////// [GUARDAR NUEVO PRESTAMO EN PRESTECS.JSON] /////////////////////////////////////////////
+
+            // Crear nuevo objeto en prestecs.json
+            JSONObject newPrestec = new JSONObject();
+            int newId = jsonArrayPrestecs.length() + 1; // Añade uno mas
+            newPrestec.put("id", newId);
+            newPrestec.put("idLlibre", selectLibroId);
+            newPrestec.put("idUsuari", selectUsuariId);
+
+            // Calcular la fecha
+            LocalDate currenDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String dataPrestec = currenDate.format(formatter);
+            LocalDate dataDevolucio = currenDate.plusWeeks(2); // Prestamo de 2 semanas
+            String dataDevolucioStr = dataDevolucio.format(formatter);
+
+            newPrestec.put("dataPrestec", dataPrestec);
+            newPrestec.put("dataDevolucio", dataDevolucioStr);
+
+            // Añadir nuevo prestamo al Array
+            jsonArrayPrestecs.put(newPrestec);
+
+            // Guardamos el nuevo contenido en el archivo
+            Files.write(Paths.get(filePathPrestecs), jsonArrayPrestecs.toString(4).getBytes());
+            
+            System.out.println("\nLa data de devolució és: " + dataDevolucioStr);
+
         } catch (Exception e) {
             // Control de manejo de expeciones
             System.err.println("Ha hagut un error: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public static void prestecFuncionRetornarLlibre (Scanner scanner){
+        try {
+            // Variables del archivo (prestecs.json)
+            String filePathPrestecs = "./src/main/json/prestecs.json";
+            String contentPrestecs = new String(Files.readAllBytes(Paths.get(filePathPrestecs)));
+
+            JSONArray jsonArrayPrestecs = new JSONArray(contentPrestecs);
+
+            // Variables del archivo (usuaris.json)
+            String filePathUsuaris = "./src/main/json/usuaris.json";
+            String contentUsuaris = new String(Files.readAllBytes(Paths.get(filePathUsuaris)));
+
+            JSONArray jsonArrayUsuaris = new JSONArray(contentUsuaris);
+
+            // Variables del archivo (llibres.json)
+            String filePathLlibres = "./src/main/json/llibres.json";
+            String contentLlibres = new String(Files.readAllBytes(Paths.get(filePathLlibres)));
+
+            JSONArray jsonArrayLlibres = new JSONArray(contentLlibres);
+        /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
+
+        } catch (Exception e) {
         }
     }
 }

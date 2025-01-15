@@ -333,7 +333,6 @@ public class Menu {
                 -- Gestionar Préstecs --
                 1. Agafar un nou llibre
                 2. Retornar un llibre
-                3. Eliminar préstec
                 0. Tornar al menú principal
                     """);
             if (scanner.hasNextInt()){
@@ -345,9 +344,6 @@ public class Menu {
                         break;
                     case 2:
                         // Funcio retornar un llibre
-                        break;
-                    case 3:
-                        // Funcio eliminar préstec
                         break;
                     case 0:
                         limpiarPantalla();
