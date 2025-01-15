@@ -103,7 +103,7 @@ public class Prestec {
             
             // Iterar los libros
             JSONArray idsLibrosPrestados = new JSONArray();
-            for (int i = 0; i < jsonArrayLlibres.length(); i++) {
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
                 JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
                 int idLibroPrestado = prestec.getInt("idLlibre");
                 idsLibrosPrestados.put(idLibroPrestado); // Guardar el ID de los libros prestados
