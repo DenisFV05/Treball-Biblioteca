@@ -1,108 +1,107 @@
 [
     {
-        "id" : 1,
-        "idLlibre" : 1,
-        "idUsuari" : 1,
-        "dataPrestec" : "2025-01-01",
-        "dataDevolucio" : "2025-02-01"
+        "dataDevolucio": "2025-02-01",
+        "dataPrestec": "2025-01-01",
+        "idLlibre": 1,
+        "id": 1,
+        "idUsuari": 1
     },
     {
-        "id" : 2,
-        "idLlibre" : 2,
-        "idUsuari" : 2,
-        "dataPrestec" : "2025-02-01",
-        "dataDevolucio" : "2025-03-01"   
+        "dataDevolucio": "2025-03-01",
+        "dataPrestec": "2025-02-01",
+        "idLlibre": 2,
+        "id": 2,
+        "idUsuari": 2
     },
     {
-        "id" : 3,
-        "idLlibre" : 3,
-        "idUsuari" : 3,
-        "dataPrestec" : "2025-03-01",
-        "dataDevolucio" : "2025-04-01"
+        "dataDevolucio": "2025-04-01",
+        "dataPrestec": "2025-03-01",
+        "idLlibre": 3,
+        "id": 3,
+        "idUsuari": 3
     },
     {
-        "id" : 4,
-        "idLlibre" : 4,
-        "idUsuari" : 4,
-        "dataPrestec" : "2025-04-01",
-        "dataDevolucio" : "2025-05-01"  
+        "dataDevolucio": "2025-05-01",
+        "dataPrestec": "2025-04-01",
+        "idLlibre": 4,
+        "id": 4,
+        "idUsuari": 4
     },
     {
-        "id" : 5,
-        "idLlibre" : 5,
-        "idUsuari" : 5,
-        "dataPrestec" : "2025-05-01",
-        "dataDevolucio" : "2025-06-01"   
+        "dataDevolucio": "2025-06-01",
+        "dataPrestec": "2025-05-01",
+        "idLlibre": 5,
+        "id": 5,
+        "idUsuari": 5
     },
     {
-        "id" : 6,
-        "idLlibre" : 6,
-        "idUsuari" : 6,
-        "dataPrestec" : "2025-06-01",
-        "dataDevolucio" : "2025-07-01"    
+        "dataDevolucio": "2025-07-01",
+        "dataPrestec": "2025-06-01",
+        "idLlibre": 6,
+        "id": 6,
+        "idUsuari": 6
     },
     {
-        "id" : 7,
-        "idLlibre" : 7,
-        "idUsuari" : 7,
-        "dataPrestec" : "2025-07-01",
-        "dataDevolucio" : "2025-08-01"    
+        "dataDevolucio": "2025-08-01",
+        "dataPrestec": "2025-07-01",
+        "idLlibre": 7,
+        "id": 7,
+        "idUsuari": 7
     },
     {
-        "id" : 8,
-        "idLlibre" : 8,
-        "idUsuari" : 8,
-        "dataPrestec" : "2025-08-01",
-        "dataDevolucio" : "2025-09-01"
+        "dataDevolucio": "2025-09-01",
+        "dataPrestec": "2025-08-01",
+        "idLlibre": 8,
+        "id": 8,
+        "idUsuari": 8
     },
     {
-        "id" : 9,
-        "idLlibre" : 9,
-        "idUsuari" : 9,
-        "dataPrestec" : "2025-09-01",
-        "dataDevolucio" : "2025-10-01"
+        "dataDevolucio": "2025-10-01",
+        "dataPrestec": "2025-09-01",
+        "idLlibre": 9,
+        "id": 9,
+        "idUsuari": 9
     },
     {
-        "id" : 10,
-        "idLlibre" : 10,
-        "idUsuari" : 10,
-        "dataPrestec" : "2025-10-01",
-        "dataDevolucio" : "2025-11-01"
+        "dataDevolucio": "2025-11-01",
+        "dataPrestec": "2025-10-01",
+        "idLlibre": 10,
+        "id": 10,
+        "idUsuari": 10
     },
     {
-        "id" : 11,
-        "idLlibre" : 11,
-        "idUsuari" : 11,
-        "dataPrestec" : "2025-11-01",
-        "dataDevolucio" : "2025-12-01"      
+        "dataDevolucio": "2025-12-01",
+        "dataPrestec": "2025-11-01",
+        "idLlibre": 11,
+        "id": 11,
+        "idUsuari": 11
     },
     {
-        "id" : 12,
-        "idLlibre" : 12,
-        "idUsuari" : 12,
-        "dataPrestec" : "2026-01-01",
-        "dataDevolucio" : "2026-02-01"
+        "dataDevolucio": "2026-02-01",
+        "dataPrestec": "2026-01-01",
+        "idLlibre": 12,
+        "id": 12,
+        "idUsuari": 12
     },
     {
-        "id" : 13,
-        "idLlibre" : 13,
-        "idUsuari" : 13,
-        "dataPrestec" : "2026-02-01",
-        "dataDevolucio" : "2026-03-01"
+        "dataDevolucio": "2026-03-01",
+        "dataPrestec": "2026-02-01",
+        "idLlibre": 13,
+        "id": 13,
+        "idUsuari": 13
     },
     {
-        "id" : 14,
-        "idLlibre" : 14,
-        "idUsuari" : 14,
-        "dataPrestec" : "2026-03-01",
-        "dataDevolucio" : "2026-04-01"
+        "dataDevolucio": "2026-04-01",
+        "dataPrestec": "2026-03-01",
+        "idLlibre": 14,
+        "id": 14,
+        "idUsuari": 14
     },
     {
-        "id" : 15,
-        "idLlibre" : 15,
-        "idUsuari" : 15,
-        "dataPrestec" : "2026-04-01",
-        "dataDevolucio" : "2026-05-01"
+        "dataDevolucio": "2026-05-01",
+        "dataPrestec": "2026-04-01",
+        "idLlibre": 15,
+        "id": 15,
+        "idUsuari": 15
     }
-
 ]
