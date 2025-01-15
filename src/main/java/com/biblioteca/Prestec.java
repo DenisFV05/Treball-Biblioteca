@@ -2,6 +2,8 @@ package com.biblioteca;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -158,6 +160,33 @@ public class Prestec {
                 String titol = llibreSeleccionado.getString("titol");
                 System.out.println("El llibre amb l'ID: " +"["+selectLibroId+"]"+" "+titol+","+" ha estat seleccionat.");
             }
+
+            ///////////////////////////// [GUARDAR NUEVO PRESTAMO EN PRESTECS.JSON] /////////////////////////////////////////////
+
+            // Crear nuevo objeto en prestecs.json
+            JSONObject newPrestec = new JSONObject();
+            int newId = jsonArrayPrestecs.length() + 1; // Añade uno mas
+            newPrestec.put("id", newId);
+            newPrestec.put("idLlibre", selectLibroId);
+            newPrestec.put("idUsuari", selectUsuariId);
+
+            // Calcular la fecha
+            LocalDate currenDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String dataPrestec = currenDate.format(formatter);
+            LocalDate dataDevolucio = currenDate.plusWeeks(2); // Prestamo de 2 semanas
+            String dataDevolucioStr = dataDevolucio.format(formatter);
+
+            newPrestec.put("dataPrestec", dataPrestec);
+            newPrestec.put("dataDevolucio", dataDevolucioStr);
+
+            // Añadir nuevo prestamo al Array
+            jsonArrayPrestecs.put(newPrestec);
+
+            // Guardamos el nuevo contenido en el archivo
+            Files.write(Paths.get(filePathPrestecs), jsonArrayPrestecs.toString(4).getBytes());
+            
+            System.out.println("\nLa data de devolució és: " + dataDevolucioStr);
 
         } catch (Exception e) {
             // Control de manejo de expeciones
