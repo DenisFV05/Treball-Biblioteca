@@ -30,7 +30,8 @@ public class Menu {
                         menuUsuarios(scanner);
                         break;
                     case 3:
-                        // Aquí podrías afegir la gestió de préstecs
+                        limpiarPantalla();
+                        menuPrestecs(scanner);
                         break;
                     case 0:
                         limpiarPantalla();
@@ -322,5 +323,43 @@ public class Menu {
                 optListarLibros = -1;
             }
         } while (optListarLibros != 0);
+    }
+
+    public static void menuPrestecs(Scanner scanner){
+        int optPrestecs;
+        
+        do { 
+            System.out.println("""
+                -- Gestionar Préstecs --
+                1. Agafar un nou llibre
+                2. Retornar un llibre
+                3. Eliminar préstec
+                0. Tornar al menú principal
+                    """);
+            if (scanner.hasNextInt()){
+                optPrestecs = scanner.nextInt();
+                
+                switch (optPrestecs) {
+                    case 1:
+                        Prestec.prestecFuncionAgafarNouLlibre(scanner);
+                        break;
+                    case 2:
+                        // Funcio retornar un llibre
+                        break;
+                    case 3:
+                        // Funcio eliminar préstec
+                        break;
+                    case 0:
+                        limpiarPantalla();
+                        break;
+                    default:
+                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                }
+            } else {
+                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                scanner.next();
+                optPrestecs = -1;
+            }
+        } while (optPrestecs != 0);
     }
 }
