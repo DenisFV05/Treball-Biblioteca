@@ -71,6 +71,7 @@ public class Prestec {
                 try {
                     selectUsuariId = scanner.nextInt();
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
+                    
                 } catch (Exception e) {
                     System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
                     scanner.nextLine();
@@ -192,6 +193,31 @@ public class Prestec {
             // Control de manejo de expeciones
             System.err.println("Ha hagut un error: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public static void prestecFuncionRetornarLlibre (Scanner scanner){
+        try {
+            // Variables del archivo (prestecs.json)
+            String filePathPrestecs = "./src/main/json/prestecs.json";
+            String contentPrestecs = new String(Files.readAllBytes(Paths.get(filePathPrestecs)));
+
+            JSONArray jsonArrayPrestecs = new JSONArray(contentPrestecs);
+
+            // Variables del archivo (usuaris.json)
+            String filePathUsuaris = "./src/main/json/usuaris.json";
+            String contentUsuaris = new String(Files.readAllBytes(Paths.get(filePathUsuaris)));
+
+            JSONArray jsonArrayUsuaris = new JSONArray(contentUsuaris);
+
+            // Variables del archivo (llibres.json)
+            String filePathLlibres = "./src/main/json/llibres.json";
+            String contentLlibres = new String(Files.readAllBytes(Paths.get(filePathLlibres)));
+
+            JSONArray jsonArrayLlibres = new JSONArray(contentLlibres);
+        /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
+
+        } catch (Exception e) {
         }
     }
 }
