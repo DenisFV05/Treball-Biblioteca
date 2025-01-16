@@ -102,4 +102,102 @@ public class Usuari {
         }
         return maxId + 1; // Devuelve una id nueva
     }
+
+    // Modificar un usuari existent
+    public static void modificarUsuari() {
+        Scanner scanner = new Scanner(System.in); // Abrir input
+        try {
+            JSONArray usuaris = llegirFitxerJson(); // Leer los usuarios
+
+            System.out.print("Introdueix l'ID de l'usuari que vols modificar: "); // Introducir la ID del usuario a modificar
+            int idUsuari = Integer.parseInt(scanner.nextLine());
+
+            // Buscamos el usuario con el id proporcionado
+            JSONObject usuari = buscarUsuariPerId(usuaris, idUsuari);
+
+            if (usuari != null) { // Si el usuario no esta vacio
+                System.out.print("Introdueix el nou nom (deixa en blanc per mantenir el valor actual): ");
+                String nouNom = scanner.nextLine().trim();
+                if (!nouNom.isEmpty()) { // Si no se pone nada se queda el valor actual
+                    nouNom = validarNom(scanner);
+                    usuari.put("nom", nouNom);
+                }
+
+                System.out.print("Introdueix el nou primer cognom (deixa en blanc per mantenir el valor actual): ");
+                String nouPrimerCognom = scanner.nextLine().trim();
+                if (!nouPrimerCognom.isEmpty()) { // Si no se pone nada se queda el valor actual
+                    nouPrimerCognom = validarNom(scanner);
+                    usuari.put("cognoms", nouPrimerCognom + " " + usuari.getString("cognoms").split(" ")[1]); // modificar solo el primer apellido de un usuario, manteniendo el segundo apellido intacto
+                }
+
+                System.out.print("Introdueix el nou segon cognom (deixa en blanc per mantenir el valor actual): ");
+                String nouSegonCognom = scanner.nextLine().trim();
+                if (!nouSegonCognom.isEmpty()) { // Si no se pone nada se queda el valor actual
+                    nouSegonCognom = validarNom(scanner);
+                    usuari.put("cognoms", usuari.getString("cognoms").split(" ")[0] + " " + nouSegonCognom); // modificar solo el segundo apellido
+                }
+
+                System.out.print("Introdueix el nou telèfon (deixa en blanc per mantenir el valor actual): ");
+                String nouTelefon = scanner.nextLine().trim();
+                if (!nouTelefon.isEmpty()) { // Si no se pone nada se queda el valor actual
+                    nouTelefon = validarTelefon(scanner);
+                    usuari.put("telefon", nouTelefon);
+                }
+
+                escriureFitxerJson(usuaris); // Guardar els canvis
+                System.out.println("Usuari modificat correctament.");
+            } else {
+                System.out.println("Usuari no trobat.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en modificar l'usuari: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+
+    // Buscar un usuari per id
+    private static JSONObject buscarUsuariPerId(JSONArray usuaris, int idUsuari) {
+        for (int i = 0; i < usuaris.length(); i++) { // Bucle para encontrar el usuario
+            JSONObject usuari = usuaris.getJSONObject(i);
+            if (usuari.getInt("idUsuari") == idUsuari) {
+                return usuari;
+            }
+        }
+        return null; // Si no es troba l'usuari
+    }
+
+    public static void eliminarUsuari() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            JSONArray usuaris = llegirFitxerJson(); // Leer json
+    
+            System.out.print("Introdueix l'ID de l'usuari que vols eliminar: ");
+            int idUsuari = Integer.parseInt(scanner.nextLine());
+    
+            // Buscar el usuari per ID y eliminarlo
+            for (int i = 0; i < usuaris.length(); i++) { // Bucle que recorre los usuaris
+                JSONObject usuariActual = usuaris.getJSONObject(i); // Selecciona el usuari a eliminar
+                if (usuariActual.getInt("idUsuari") == idUsuari) {
+                    usuaris.remove(i); // Eliminar l'usuari a l'índex 'i'
+                    escriureFitxerJson(usuaris); // Guardar els canvis
+                    System.out.println("Usuari eliminat correctament.");
+                    return; // Salir del mètodo después de eliminar
+                }
+            }
+    
+            // Si no se encuentra el usuario
+            System.out.println("Usuari no trobat.");
+    
+        } catch (Exception e) {
+            System.out.println("Error en eliminar l'usuari: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+    
+    
+
+        
 }
