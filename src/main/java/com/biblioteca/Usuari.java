@@ -1,12 +1,12 @@
 package com.biblioteca;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Usuari {
     private static final String FILE_PATH = "src\\main\\json\\usuaris.json";
@@ -49,10 +49,10 @@ public class Usuari {
             System.out.print("Introdueix el telèfon de l'usuari: ");
             String telefon = validarTelefon(scanner);
 
-            System.out.print("Vols guardar aquest usuari? (sí/no): ");
+            System.out.print("Vols guardar aquest usuari? (s/n): ");
             String confirmacio = scanner.nextLine().trim().toLowerCase();
 
-            if (confirmacio.equals("sí") || confirmacio.equals("si")) {
+            if (confirmacio.equals("s")) {
                 int nouId = obtenirSeguentId(usuaris);
 
                 JSONObject nouUsuari = new JSONObject();
@@ -89,7 +89,7 @@ public class Usuari {
         do {
             System.out.print("Entrada no vàlida. Introdueix un telèfon vàlid (9 dígits): ");
             entrada = scanner.nextLine().trim();
-        } while (!entrada.matches("\\d{9}"));
+        } while (!entrada.matches("\\d{9}")); // verifica si la cadena contiene exactamente 9 digitos consecutivos, \\d es cualquier digito 0-9
         return entrada;
     }
 
