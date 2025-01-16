@@ -123,7 +123,7 @@ public class Menu {
                         // Llistar llibres en préstec
                         break;
                     case 3:
-                        // Llistar per autor
+                        Llibres.llistatLlibresAutor();
                         break;
                     case 4:
                         // Cercar títol
