@@ -343,7 +343,7 @@ public class Menu {
                         Prestec.prestecFuncionAgafarNouLlibre(scanner);
                         break;
                     case 2:
-                        // Funcio retornar un llibre
+                        Prestec.prestecFuncionRetornarLlibre(scanner);
                         break;
                     case 0:
                         limpiarPantalla();
