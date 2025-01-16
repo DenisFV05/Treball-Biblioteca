@@ -9,13 +9,6 @@ import org.json.JSONObject;
 
 public class Llibres {
 
-
-
-
-
-
-
-
     public static void llistatLlibres(){
         try{
             // Ruta de l'arxiu json llibres
@@ -61,7 +54,8 @@ public class Llibres {
             e.printStackTrace();
         }
     }
-        
+     
+    
     public static void llistatLlibresAutor(){
         try{
             // Ruta de l'arxiu json llibres
@@ -118,7 +112,66 @@ public class Llibres {
             }
             if (!llibreTrobat) {
                 System.out.println("No s'han trobat llibres per a l'autor introduït.");
+                System.out.println();   // Salto de linea para mejora visual
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void llistatLlibresTitol(){
+        try{
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingut = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+            
+            // Demanem la paraula que volem buscar en el titol
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Introdueix la paraula que vols buscar en els titols: ");
+            String paraulaTitol = scanner.nextLine();
+        
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingut);
+        
+            //Iterem per accedir a cadascun dels llibres
+            for (int i = 0; i < llibres.length(); i++){
+                // Agafem cada llibre com a Object
+                JSONObject llibre = llibres.getJSONObject(i);
+        
+                // Guardem les dades del llibre
+                int id = llibre.getInt("idLlibre");
+                String titol = llibre.getString("titol");
+                JSONArray autor = llibre.getJSONArray("autor");
+        
+                // Mostrem la capçelera de la llista
+                if (i == 0){
+                    System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER TITOL" + "    " + "-".repeat(33));
+                    System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
+                    System.out.println();
+                    System.out.println("-".repeat(100));
+                }
+        
+                // Si trobem la paraula introduida en algun titol, mostrem el id, titol i autor/autors del llibre
+                if ((titol.toLowerCase()).contains((paraulaTitol.toLowerCase()))){
+                    System.out.printf("%-5d | %-45s | ", id, titol);
+                    for (int j = 0; j < autor.length(); j++){
+                        if (j != 0){
+                            System.out.print(" / " + autor.getString(j));
+                        } else {
+                            System.out.print(autor.getString(j));
+                        }
+                    }
+                    // Deixem el salt de linea entre llibre i llibre
+                    System.out.println();
+                    if (i == (llibres.length() - 1)){
+                        System.out.println();
+                    } else {
+                        System.out.println("-".repeat(100));
+                    }
+                }
+            }
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
