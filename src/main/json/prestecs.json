@@ -110,5 +110,12 @@
         "idLlibre": 16,
         "id": 16,
         "idUsuari": 1
+    },
+    {
+        "dataDevolucio": "2025-01-30",
+        "dataPrestec": "2025-01-16",
+        "idLlibre": 18,
+        "id": 17,
+        "idUsuari": 13
     }
 ]
