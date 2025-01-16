@@ -117,16 +117,16 @@ public class Menu {
 
                 switch (optListarLibros) {
                     case 1:
-                        // Llistar tots els llibres
+                        Llibres.llistatLlibres();
                         break;
                     case 2:
-                        // Llistar llibres en préstec
+                        Llibres.llistatLlibresPrestec();
                         break;
                     case 3:
-                        // Llistar per autor
+                        Llibres.llistatLlibresAutor();
                         break;
                     case 4:
-                        // Cercar títol
+                        Llibres.llistatLlibresTitol();
                         break;
                     case 0:
                         limpiarPantalla();
