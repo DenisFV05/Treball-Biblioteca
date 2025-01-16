@@ -119,11 +119,20 @@ public class Prestec {
 
                 int idLlibre = llibre.getInt("idLlibre");
                 String titol = llibre.getString("titol");
-                String autor = llibre.getString("autor");
+                
+                // Obtener los autores (ya que estan el lista en el json)
+                JSONArray autorsArray = llibre.getJSONArray("autor");
+                StringBuilder autors = new StringBuilder();
+                for (int j = 0; j < autorsArray.length(); j++) {
+                    if (j > 0) {
+                        autors.append(", "); // Si hay mas de 1 autor se separan por ,
+                    }
+                    autors.append(autorsArray.getString(j));
+                }
 
                 // Verificar los libros reservaods e imprimir los que no
                 if (!idsLibrosPrestados.toList().contains(idLlibre)) {
-                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autor);
+                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autors.toString());
                 }
             }
 
@@ -196,6 +205,8 @@ public class Prestec {
         }
     }
 
+
+    
     public static void prestecFuncionRetornarLlibre (Scanner scanner){
         try {
             // Variables del archivo (prestecs.json)
@@ -216,7 +227,73 @@ public class Prestec {
 
             JSONArray jsonArrayLlibres = new JSONArray(contentLlibres);
         /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
+        for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+            JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
 
+            // Dar formato a las variables de los prestamos
+            int id = prestec.getInt("id");
+            int idLlibre = prestec.getInt("idLlibre");
+            int idUsuari = prestec.getInt("idUsuari");
+            String dataPrestec = prestec.getString("dataPrestec");
+            String dataDevolucio = prestec.getString("dataDevolucio");
+        }
+
+    /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
+
+        // Header de la lista de usuarios
+        System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+        System.out.println("--------------------------------------------------------");
+
+        // Iterar los usuarios
+        for (int i = 0; i < jsonArrayUsuaris.length(); i++) {
+            JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
+
+            // Dar formato a las variables de los usuarios
+            int idUsuari = usuari.getInt("idUsuari");
+            String nom = usuari.getString("nom");
+            String cognoms = usuari.getString("cognoms");
+            int telefon = usuari.getInt("telefon");
+
+            // Imprimir los datos de los usuarios
+            System.out.printf("%-6d| %-15s| %-20s| %-10d%n", idUsuari, nom, cognoms, telefon);
+        }
+        
+        // Solicitar el ID y verificar el Input
+        int selectUsuariId = -1; // Se añade un valor no valido para que salte el comprobante
+        boolean inputValido = false;
+        while (!inputValido){
+            System.out.println("\nIntrodueix l'ID d'un usuari per seleccionar-lo: ");
+
+            try {
+                selectUsuariId = scanner.nextInt();
+                inputValido = true; // Si el selectUsuariId es un (int) es = true
+                
+            } catch (Exception e) {
+                System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                scanner.nextLine();
+            }
+        }
+
+        // Buscar el usuario en base el ID seleccionado
+        JSONObject usuariSeleccionado = null;
+        for (int i = 0; i < jsonArrayUsuaris.length(); i++){
+            JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
+            int idUsuari = usuari.getInt("idUsuari");
+
+            // Si encuentra el ID escrito en usuari.json
+            if(idUsuari == selectUsuariId) {
+                // [GUARDADO]
+                usuariSeleccionado = usuari; // Donde se guardara el usuario para mas tarde
+            }
+        }
+        // Si no se encuentra el ID (Mensajes)
+        if (usuariSeleccionado == null) {
+            System.out.println("No s'ha trobat l'usuari amb l'ID: " + selectUsuariId + "\n");
+            Menu.menuPrestecs(scanner);
+        } else {
+            String nom = usuariSeleccionado.getString("nom");
+            System.out.println("L'usuari amb ID: " +"["+selectUsuariId+"]"+" "+nom+","+" ha estat seleccionat.");
+        }
         } catch (Exception e) {
         }
     }
