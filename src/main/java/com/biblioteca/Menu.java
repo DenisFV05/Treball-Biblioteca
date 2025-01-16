@@ -126,7 +126,7 @@ public class Menu {
                         Llibres.llistatLlibresAutor();
                         break;
                     case 4:
-                        // Cercar títol
+                        Llibres.llistatLlibresTitol();
                         break;
                     case 0:
                         limpiarPantalla();
