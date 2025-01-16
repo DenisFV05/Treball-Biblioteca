@@ -117,7 +117,7 @@ public class Menu {
 
                 switch (optListarLibros) {
                     case 1:
-                        // Llistar tots els llibres
+                        Llibres.llistatLlibres();
                         break;
                     case 2:
                         // Llistar llibres en préstec
