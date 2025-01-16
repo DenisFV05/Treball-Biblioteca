@@ -120,7 +120,7 @@ public class Menu {
                         Llibres.llistatLlibres();
                         break;
                     case 2:
-                        // Llistar llibres en préstec
+                        Llibres.llistatLlibresPrestec();
                         break;
                     case 3:
                         Llibres.llistatLlibresAutor();

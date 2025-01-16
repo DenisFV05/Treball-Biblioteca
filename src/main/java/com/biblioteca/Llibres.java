@@ -13,10 +13,10 @@ public class Llibres {
         try{
             // Ruta de l'arxiu json llibres
             String rutaJsonLlibres = "src/main/json/llibres.json";
-            String contingut = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
             
             // Convertim el contingut a un JSONArray
-            JSONArray llibres = new JSONArray(contingut);
+            JSONArray llibres = new JSONArray(contingutLlibres);
             
             // Iterem per accedir a cadasucn dels llibres
             for (int i = 0; i < llibres.length(); i++){
@@ -54,13 +54,87 @@ public class Llibres {
             e.printStackTrace();
         }
     }
+
+
+    public static void llistatLlibresPrestec(){
+        try {
+            // Agafem la ruta de l'arxiu json llibres i del prestecs
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            String rutaJsonPrestecs = "src/main/json/prestecs.json";
+            String contingutPrestecs = new String(Files.readAllBytes(Paths.get(rutaJsonPrestecs)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            JSONArray prestecs = new JSONArray(contingutPrestecs);
+
+            if (prestecs.length() == 0){
+                System.out.println("No hi ha cap llibre en prestec actualment!");
+            } else {
+                // Mostrem la capçelera de la llista
+                System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES EN PRESTEC" + "    " + "-".repeat(33));
+                System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
+                System.out.println();
+                System.out.println("-".repeat(100));
+
+                // Iterem entre tots els llibres en prestec
+                for (int i = 0; i < prestecs.length(); i++){
+                    
+                    // Convertim a JSONObject
+                    JSONObject prestec = prestecs.getJSONObject(i);
+
+                    // Agafem el id del llibre per mostrar la informació d'aquest
+                    int idLlibrePrestec = prestec.getInt("idLlibre");
+
+                    // Com que ja tenim el seu id, iterem el jsonarray de llibres per buscar l'id i mostrar la informacio
+                    for (int j = 0; j < llibres.length(); j++){
+
+                        // Convertim a JSONObject
+                        JSONObject llibre = llibres.getJSONObject(j);
+
+                        // Agafem el idLlibre per el qual anem iterant
+                        int idLlibreLlibre = llibre.getInt("idLlibre");
+
+                        // Comprovem si el llibre pel qual estem iterant coincideix la id
+                        if (idLlibrePrestec == idLlibreLlibre){
+
+                            // Guardem les dades del llibre
+                            String titol = llibre.getString("titol");
+                            JSONArray autor = llibre.getJSONArray("autor");
+
+                            // Mostrem la informacio del llibre en la llista
+                            System.out.printf("%-5d | %-45s | ", idLlibreLlibre, titol);
+                            for (int k = 0; k < autor.length(); k++){
+                                if (k != 0){
+                                    System.out.print(" / " + autor.getString(k));
+                                }else{
+                                    System.out.print(autor.getString(k));
+                                }
+                            }
+                            System.out.println("");
+                            if (i == (prestecs.length() - 1)){
+                                System.out.println();
+                            } else {
+                                System.out.println("-".repeat(100));
+                            }
+                        }
+                    }
+                }
+            }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
      
     
     public static void llistatLlibresAutor(){
         try{
             // Ruta de l'arxiu json llibres
             String rutaJsonLlibres = "src/main/json/llibres.json";
-            String contingut = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
         
             // Demanem la paraula autor
             Scanner scanner = new Scanner(System.in);
@@ -68,7 +142,7 @@ public class Llibres {
             String autorIntroduit = scanner.nextLine();
             
             // Convertim el contingut a un JSONArray
-            JSONArray llibres = new JSONArray(contingut);
+            JSONArray llibres = new JSONArray(contingutLlibres);
         
             // Mostrem la capçelera de la llista
             System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER AUTOR" + "    " + "-".repeat(33));
@@ -124,7 +198,7 @@ public class Llibres {
         try{
             // Ruta de l'arxiu json llibres
             String rutaJsonLlibres = "src/main/json/llibres.json";
-            String contingut = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
             
             // Demanem la paraula que volem buscar en el titol
             Scanner scanner = new Scanner(System.in);
@@ -132,7 +206,7 @@ public class Llibres {
             String paraulaTitol = scanner.nextLine();
         
             // Convertim el contingut a JSONArray
-            JSONArray llibres = new JSONArray(contingut);
+            JSONArray llibres = new JSONArray(contingutLlibres);
         
             //Iterem per accedir a cadascun dels llibres
             for (int i = 0; i < llibres.length(); i++){
