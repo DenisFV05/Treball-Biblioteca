@@ -363,7 +363,7 @@ public class Llibres {
                         trobat = true;
 
                         // Mostrem les dades actuals del llibre
-                        System.out.print("Llibre trobat! El titol actual es: " + llibre.getString("titol"));
+                        System.out.println("Llibre trobat! El titol actual es: " + llibre.getString("titol"));
 
                         // Demanem el nou titol
                         System.out.print("Introdueix el nou titol: ");
