@@ -191,7 +191,6 @@ public class Llibres {
                 System.out.println("No s'han trobat llibres per a l'autor introduït.");
                 System.out.println();   // Salto de linea para mejora visual
             }
-            scanner.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,7 +248,6 @@ public class Llibres {
                     }
                 }
             }
-            scanner.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
