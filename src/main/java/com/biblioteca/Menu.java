@@ -162,6 +162,7 @@ public class Menu {
 
                 switch (optModificarLibros) {
                     case 1:
+                        Llibres.modificarTitolLlibre();
                         break;
                     case 2:
                         break;

@@ -331,9 +331,63 @@ public class Llibres {
     }
 
 
-    public static void modificarLlibre(){
+    public static void modificarTitolLlibre(){
         try {
+            // Pedir el id del libro a modificar, pedir titulo autores, modificar y actualizar
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Boolean de comprovació per saber si s'ha trobat l'id
+            boolean trobat = false;
             
+            // Scanner per a introduir l'usuari
+            Scanner scanner = new Scanner(System.in);
+
+            while (!trobat) { 
+                // Demanem el id del llibre a modificar
+                System.out.print("Introdueix l'id del llibre que vols modificar: ");
+                int idLlibreModificar = scanner.nextInt();
+
+                for (int i = 0; i < llibres.length(); i++){
+                    // Agafem cada llibre com a object
+                    JSONObject llibre = llibres.getJSONObject(i);
+
+                    // Comprovem si trobem l'id
+                    if (idLlibreModificar == llibre.getInt("idLlibre")){
+                        // Cambiem el nostre boolea de comprovació a true per sortir del bucle posteriorment
+                        trobat = true;
+
+                        // Mostrem les dades actuals del llibre
+                        System.out.print("Llibre trobat! El titol actual es: " + llibre.getString("titol"));
+
+                        // Demanem el nou titol
+                        System.out.print("Introdueix el nou titol: ");
+                        String titol = scanner.nextLine();
+                        
+
+                        // Cambiem els valors del JSONObject
+                        llibre.put("titol", titol);
+
+                        // Actualitzem el llibres.json
+                        try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                            actulitzar.write(llibres.toString(4));
+                            actulitzar.flush();
+                        }
+                    }
+                    System.out.printf("El llibre amb id [%d] s'ha modificat correctament!\n", idLlibreModificar);
+                    break;      // Sortim del bucle
+                }
+
+                // Si recorrem l'arxiu llibres.json i no trobem l'id, enviem missatge
+                if (!trobat){
+                    System.out.println("No s'ha trobat cap llibre amb aquest ID. Torna-ho a intentar");
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
