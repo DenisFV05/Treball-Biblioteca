@@ -165,6 +165,7 @@ public class Menu {
                         Llibres.modificarTitolLlibre();
                         break;
                     case 2:
+                        Llibres.modificarAutorLlibre();
                         break;
                     case 0:
                         limpiarPantalla();
