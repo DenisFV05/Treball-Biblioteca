@@ -113,14 +113,5 @@
         "titol": "Mucha Miel",
         "idLlibre": 20,
         "autor": ["Juaquin Gustamande"]
-    },
-    {
-        "titol": "los angeles",
-        "idLlibre": 21,
-        "autor": [
-            "pepe",
-            " raul",
-            " paco"
-        ]
     }
 ]

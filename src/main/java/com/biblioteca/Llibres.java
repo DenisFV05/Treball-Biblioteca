@@ -263,13 +263,8 @@ public class Llibres {
             String rutaJsonLlibres = "src/main/json/llibres.json";
             String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
 
-            // Ruta de l'arxiu json prestecs
-            String rutaJsonPrestecs = "src/main/json/prestecs.json";
-            String contingutPrestecs = new String(Files.readAllBytes(Paths.get(rutaJsonPrestecs)));
-
-            // Convertim els continguts a JSONArrays per recorrer posteriorment
+            // Convertim el contingut a JSONArray
             JSONArray llibres = new JSONArray(contingutLlibres);
-            JSONArray prestecs = new JSONArray(contingutPrestecs);
 
             // Demanem el titol i l'autor o autors del llibre a afegir
             Scanner scanner = new Scanner(System.in);
@@ -332,9 +327,13 @@ public class Llibres {
             // Salt de linea
             System.out.println();
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void modificarLlibre(){
+
     }
 }
