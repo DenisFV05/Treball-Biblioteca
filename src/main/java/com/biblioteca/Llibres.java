@@ -351,6 +351,7 @@ public class Llibres {
                 // Demanem el id del llibre a modificar
                 System.out.print("Introdueix l'id del llibre que vols modificar: ");
                 int idLlibreModificar = scanner.nextInt();
+                scanner.nextLine();     // Consume el salto de linea pendiente
 
                 for (int i = 0; i < llibres.length(); i++){
                     // Agafem cada llibre com a object
@@ -377,9 +378,10 @@ public class Llibres {
                             actulitzar.write(llibres.toString(4));
                             actulitzar.flush();
                         }
+                        
+                        System.out.printf("El llibre amb id [%d] s'ha modificat correctament!\n", idLlibreModificar);
+                        break;      // Sortim del bucle
                     }
-                    System.out.printf("El llibre amb id [%d] s'ha modificat correctament!\n", idLlibreModificar);
-                    break;      // Sortim del bucle
                 }
 
                 // Si recorrem l'arxiu llibres.json i no trobem l'id, enviem missatge
