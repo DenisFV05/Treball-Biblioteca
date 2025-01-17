@@ -340,9 +340,11 @@ public class Menu {
                 
                 switch (optPrestecs) {
                     case 1:
+                        limpiarPantalla();
                         Prestec.prestecFuncionAgafarNouLlibre(scanner);
                         break;
                     case 2:
+                        limpiarPantalla();
                         Prestec.prestecFuncionRetornarLlibre(scanner);
                         break;
                     case 0:
