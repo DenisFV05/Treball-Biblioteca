@@ -441,10 +441,10 @@ public class Llibres {
                         List<String> llistaAutors = new ArrayList<>();
                         if (autors.contains(",")){
                             for (String autor : autors.split(",")){
-                                llistaAutors.add(autor);
+                                llistaAutors.add(autor.trim());
                             }
                         } else {
-                            llistaAutors.add(autors);
+                            llistaAutors.add(autors.trim());
                         }
 
                         // Cambiem els valors del JSONObject

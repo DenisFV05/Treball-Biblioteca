@@ -110,8 +110,11 @@
         "autor": ["Kiko Mortero"]
     },
     {
-        "titol": "Mucha Miel",
+        "titol": "Mucha suerte",
         "idLlibre": 20,
-        "autor": ["Juaquin Gustamande"]
+        "autor": [
+            "Pepe",
+            " Carlos"
+        ]
     }
 ]
