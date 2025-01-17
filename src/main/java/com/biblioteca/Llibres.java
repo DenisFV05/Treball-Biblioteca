@@ -1,7 +1,10 @@
 package com.biblioteca;
 
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -188,6 +191,7 @@ public class Llibres {
                 System.out.println("No s'han trobat llibres per a l'autor introduït.");
                 System.out.println();   // Salto de linea para mejora visual
             }
+            scanner.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -245,7 +249,90 @@ public class Llibres {
                     }
                 }
             }
-        
+            scanner.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void afegirLlibre(){
+        try {
+            
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Ruta de l'arxiu json prestecs
+            String rutaJsonPrestecs = "src/main/json/prestecs.json";
+            String contingutPrestecs = new String(Files.readAllBytes(Paths.get(rutaJsonPrestecs)));
+
+            // Convertim els continguts a JSONArrays per recorrer posteriorment
+            JSONArray llibres = new JSONArray(contingutLlibres);
+            JSONArray prestecs = new JSONArray(contingutPrestecs);
+
+            // Demanem el titol i l'autor o autors del llibre a afegir
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Introdueix el titol del nou llibre: ");
+            String titolLlibreAfegir = scanner.nextLine();
+
+            System.out.print("Introdueix l'autor o els autors del nou llibre (Separats per comes ','): ");
+            String autors = scanner.nextLine();
+
+            // idLlibre ha de ser unic
+            int id = llibres.length() + 1;
+
+            if (!(autors.contains(","))){
+                // Afegim l'unic autor a format llista
+                List<String> llistaAutors = new ArrayList<>();
+                llistaAutors.add(autors);
+
+                // Afegim les claus al llibre
+                JSONObject nouLlibre = new JSONObject();
+
+                nouLlibre.put("idLlibre", id);
+                nouLlibre.put("titol", titolLlibreAfegir);
+                nouLlibre.put("autor", llistaAutors);
+
+                // Afegim el llibre al JSONArray
+                llibres.put(nouLlibre);
+
+                // Actualitzem el llibres.json
+                try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                    actulitzar.write(llibres.toString(4));
+                    actulitzar.flush();
+                }
+
+            } else {
+                // Afegim els autors a format llista
+                List<String> llistaAutors = new ArrayList<>();
+                for (String autor : autors.split(",")){
+                    llistaAutors.add(autor.trim());     // Treu espais innecessaris
+                }
+
+                // Afegim les claus al llibre
+                JSONObject nouLlibre = new JSONObject();
+
+                nouLlibre.put("idLlibre", id);
+                nouLlibre.put("titol", titolLlibreAfegir);
+                nouLlibre.put("autor", llistaAutors);
+
+                // Afegim el llibre al JSONArray
+                llibres.put(nouLlibre);
+
+                // Actualitzem el llibres.json
+                try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                    actulitzar.write(llibres.toString(4));
+                    actulitzar.flush();
+                }
+            }
+
+            System.out.printf("El llibre [%s] amb id [%d] escrit per [%s] s'ha afegit correctament", titolLlibreAfegir, id, autors);
+
+            // Salt de linea
+            System.out.println();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

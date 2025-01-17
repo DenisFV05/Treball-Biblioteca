@@ -72,7 +72,7 @@ public class Menu {
 
                 switch (optLibros) {
                     case 1:
-                        // Afegir llibre
+                        Llibres.afegirLlibre();
                         break;
                     case 2:
                         limpiarPantalla();
@@ -117,15 +117,19 @@ public class Menu {
 
                 switch (optListarLibros) {
                     case 1:
+                        limpiarPantalla();
                         Llibres.llistatLlibres();
                         break;
                     case 2:
+                        limpiarPantalla();
                         Llibres.llistatLlibresPrestec();
                         break;
                     case 3:
+                        limpiarPantalla();
                         Llibres.llistatLlibresAutor();
                         break;
                     case 4:
+                        limpiarPantalla();
                         Llibres.llistatLlibresTitol();
                         break;
                     case 0:

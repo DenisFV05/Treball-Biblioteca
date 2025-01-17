@@ -1,102 +1,126 @@
 [
     {
-        "idLlibre": 1,
         "titol": "Don Quijote de la Mancha",
+        "idLlibre": 1,
         "autor": ["Miguel de Cervantes"]
     },
     {
-        "idLlibre": 2,
         "titol": "La sombra del viento",
+        "idLlibre": 2,
         "autor": ["Carlos Ruiz Zafon"]
     },
     {
-        "idLlibre": 3,
         "titol": "El ultimo Caton",
-        "autor": ["Matilde Asensi", "Jesus Asensi"]
+        "idLlibre": 3,
+        "autor": [
+            "Matilde Asensi",
+            "Jesus Asensi"
+        ]
     },
     {
-        "idLlibre": 4,
         "titol": "Los renglones torcidos de Dios",
+        "idLlibre": 4,
         "autor": ["Torcuato Luca de Tena"]
     },
     {
-        "idLlibre": 5,
         "titol": "El desafio etico: Politica, justicia y paz",
-        "autor": ["Adela Cortina", "Jesus Conill"]
+        "idLlibre": 5,
+        "autor": [
+            "Adela Cortina",
+            "Jesus Conill"
+        ]
     },
     {
-        "idLlibre": 6,
         "titol": "La Celestina",
+        "idLlibre": 6,
         "autor": ["Fernando de Rojas"]
     },
     {
-        "idLlibre": 7,
         "titol": "El Diablo Ilustrado",
-        "autor": ["Angel Santiesteban", "Alejandro Gutierrez"]
+        "idLlibre": 7,
+        "autor": [
+            "Angel Santiesteban",
+            "Alejandro Gutierrez"
+        ]
     },
     {
-        "idLlibre": 8,
         "titol": "Patria",
+        "idLlibre": 8,
         "autor": ["Fernando Aramburu"]
     },
     {
-        "idLlibre": 9,
         "titol": "Nada",
+        "idLlibre": 9,
         "autor": ["Carmen Laforet"]
     },
     {
-        "idLlibre": 10,
         "titol": "La sonrisa etrusca",
-        "autor": ["Jose Luis Sampedro", "Olga Lucas"]
+        "idLlibre": 10,
+        "autor": [
+            "Jose Luis Sampedro",
+            "Olga Lucas"
+        ]
     },
     {
-        "idLlibre": 11,
         "titol": "Rimas y leyendas",
+        "idLlibre": 11,
         "autor": ["Gustavo Adolfo Becquer"]
     },
     {
-        "idLlibre": 12,
         "titol": "Manual del perfecto idiota iberoamericano",
-        "autor": ["Carlos Alberto Montaner", "Placido Arango"]
+        "idLlibre": 12,
+        "autor": [
+            "Carlos Alberto Montaner",
+            "Placido Arango"
+        ]
     },
     {
-        "idLlibre": 13,
         "titol": "El sombrero de tres picos",
+        "idLlibre": 13,
         "autor": ["Pedro Antonio de Alarcon"]
     },
     {
-        "idLlibre": 14,
         "titol": "Tierra de campos",
+        "idLlibre": 14,
         "autor": ["David Trueba"]
     },
     {
-        "idLlibre": 15,
         "titol": "La buena suerte",
+        "idLlibre": 15,
         "autor": ["Rosa Montero"]
     },
-    {   
-        "idLlibre": 16,
+    {
         "titol": "Lola Lolita",
+        "idLlibre": 16,
         "autor": ["Juaking Mango"]
     },
-    {   
-        "idLlibre": 17,
+    {
         "titol": "Alfonsteca Karateka",
+        "idLlibre": 17,
         "autor": ["Luouise Misse"]
     },
-    {   
-        "idLlibre": 18,
+    {
         "titol": "Solecito Fresquito",
+        "idLlibre": 18,
         "autor": ["Mariona Cross"]
     },
-    {   
-        "idLlibre": 19,
+    {
         "titol": "2 Peines",
+        "idLlibre": 19,
         "autor": ["Kiko Mortero"]
     },
-    {   
-        "idLlibre": 20,
+    {
         "titol": "Mucha Miel",
+        "idLlibre": 20,
         "autor": ["Juaquin Gustamande"]
+    },
+    {
+        "titol": "los angeles",
+        "idLlibre": 21,
+        "autor": [
+            "pepe",
+            " raul",
+            " paco"
+        ]
     }
 ]
