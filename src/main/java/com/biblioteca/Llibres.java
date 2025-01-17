@@ -332,6 +332,10 @@ public class Llibres {
 
 
     public static void modificarLlibre(){
-
+        try {
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
