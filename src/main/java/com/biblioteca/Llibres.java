@@ -513,14 +513,14 @@ public class Llibres {
                     // Mostrem el contingut del llibre
                     System.out.println("El titol del llibre es: " + llibre.getString("titol"));
                     if (llibre.getJSONArray("autor").length() > 1){
-                        System.out.println("Llibre trobat! Els autors actuals son: " + llibre.getJSONArray("autor").toString().replace(",", " /"));
+                        System.out.println("Els autors son: " + llibre.getJSONArray("autor").toString().replace(",", " /"));
                     } else {
-                        System.out.println("Llibre trobat! L'autor actual es: " + llibre.getJSONArray("autor").toString());
+                        System.out.println("L'autor es: " + llibre.getJSONArray("autor").toString());
                     }
 
                     // Preguntem si es segur que vol eliminar el llibre
                     System.out.println("Vols eliminar el llibre?");
-                    System.out.print("S / N");
+                    System.out.print("S / N: ");
                     String comprovarEliminar = scanner.nextLine();
 
                     if (comprovarEliminar.trim().equals("S") || comprovarEliminar.trim().equals("s")){
