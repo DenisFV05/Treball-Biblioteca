@@ -471,4 +471,68 @@ public class Llibres {
             e.printStackTrace();
         }
     }
+
+    public static void eliminarLlibre(){
+        try {
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Scanner per a introduir l'usuari
+            Scanner scanner = new Scanner(System.in);
+
+            // Boolea per comprovar si s'ha trobat el llibre
+            boolean trobat = false;
+
+            // Demanem l'id del llibre a eliminar
+            System.out.print("Introdueix l'id del llibre que vols eliminar: ");
+            int idLlibreEliminar = scanner.nextInt();
+            scanner.nextLine();     // Consume el salto de linea pendiente
+
+            for (int i = 0; i < llibres.length(); i++){
+                // Agafem cada llibre com a object
+                JSONObject llibre = llibres.getJSONObject(i);
+
+                if (idLlibreEliminar == llibre.getInt("idLlibre")){
+                    // Cambiem el boolea
+                    trobat = true;
+
+                    // Mostrem el contingut del llibre
+                    System.out.println("El titol del llibre es: " + llibre.getString("titol"));
+                    if (llibre.getJSONArray("autor").length() > 1){
+                        System.out.println("Llibre trobat! Els autors actuals son: " + llibre.getJSONArray("autor").toString().replace(",", " /"));
+                    } else {
+                        System.out.println("Llibre trobat! L'autor actual es: " + llibre.getJSONArray("autor").toString());
+                    }
+
+                    // Preguntem si es segur que vol eliminar el llibre
+                    System.out.println("Vols eliminar el llibre?");
+                    System.out.print("S / N");
+                    String comprovarEliminar = scanner.nextLine();
+
+                    if (comprovarEliminar.trim().equals("S") || comprovarEliminar.trim().equals("s")){
+                        // Eliminem el llibre
+                        llibres.remove(i);
+
+                        // Actualitzem el llibres.json
+                        try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                            actulitzar.write(llibres.toString(4));
+                            actulitzar.flush();
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (!trobat){
+                // Missatge per si el llibre no es trobat després de recòrrer la llista
+                System.out.println("L'id " + idLlibreEliminar + " no s'ha torbat!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
