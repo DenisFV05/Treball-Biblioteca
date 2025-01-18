@@ -10,6 +10,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Prestec {
+    /**
+     *  Explicació de la funció "prestecFuncionAgafarNouLlibre"
+     * 
+     * @param scanner (Hagafa l'input del usuari per escollir l'ID d'un usuari i l'ID d'un llibre)
+     * En aquesta funció no cal el "return" ya que la funció fa el préstec, informa al usuari
+     * 
+     * [FUNCIÓ]
+     * Primer. Fa el set-up dels arxius .json per poder modificarlos.
+     * Segon. Itera l'arxiu usuaris.json i es fa una tabla amb tots el usuaris.
+     * Tercer. Escollir l'ID del usuari que vols seleccionar per fer el préstec.
+     * Quart. Itera l'arxiu llibres.json i es fa una tabla amb tots el llibres disponibles.
+     * Cinquè. Escollir l'ID del llibre que vols seleccionar per fer el préstec.
+     * Sisè. Es crea un nou objecte a l'arxiu prestecs.json y et dona la data de retorn.
+     * @exception Controla que si n'hi ha un error puguis saber quin error ha sigut.
+     */
+
     public static void prestecFuncionAgafarNouLlibre(Scanner scanner){
         try {
             // Variables del archivo (prestecs.json)
