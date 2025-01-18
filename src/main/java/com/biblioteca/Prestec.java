@@ -26,7 +26,7 @@ public class Prestec {
      * @exception Controla que si n'hi ha un error puguis saber quin error ha sigut.
      */
 
-    public static void prestecFuncionAgafarNouLlibre(Scanner scanner){
+     public static void prestecFuncionAgafarNouLlibre(Scanner scanner){
         try {
             // Variables del archivo (prestecs.json)
             String filePathPrestecs = "./src/main/json/prestecs.json";
@@ -135,11 +135,20 @@ public class Prestec {
 
                 int idLlibre = llibre.getInt("idLlibre");
                 String titol = llibre.getString("titol");
-                String autor = llibre.getString("autor");
+                
+                // Obtener los autores (ya que estan el lista en el json)
+                JSONArray autorsArray = llibre.getJSONArray("autor");
+                StringBuilder autors = new StringBuilder();
+                for (int j = 0; j < autorsArray.length(); j++) {
+                    if (j > 0) {
+                        autors.append(", "); // Si hay mas de 1 autor se separan por ,
+                    }
+                    autors.append(autorsArray.getString(j));
+                }
 
-                // Verificar los libros reservaods e imprimir los que no
+                // Verificar los libros reservados e imprimir los que no
                 if (!idsLibrosPrestados.toList().contains(idLlibre)) {
-                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autor);
+                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autors.toString());
                 }
             }
 
@@ -203,7 +212,8 @@ public class Prestec {
             // Guardamos el nuevo contenido en el archivo
             Files.write(Paths.get(filePathPrestecs), jsonArrayPrestecs.toString(4).getBytes());
             
-            System.out.println("\nLa data de devolució és: " + dataDevolucioStr);
+            System.out.println("\nLa data de devolució és: " + dataDevolucioStr + "\n");
+            
 
         } catch (Exception e) {
             // Control de manejo de expeciones
