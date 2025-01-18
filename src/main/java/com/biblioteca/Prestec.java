@@ -119,20 +119,11 @@ public class Prestec {
 
                 int idLlibre = llibre.getInt("idLlibre");
                 String titol = llibre.getString("titol");
-                
-                // Obtener los autores (ya que estan el lista en el json)
-                JSONArray autorsArray = llibre.getJSONArray("autor");
-                StringBuilder autors = new StringBuilder();
-                for (int j = 0; j < autorsArray.length(); j++) {
-                    if (j > 0) {
-                        autors.append(", "); // Si hay mas de 1 autor se separan por ,
-                    }
-                    autors.append(autorsArray.getString(j));
-                }
+                String autor = llibre.getString("autor");
 
                 // Verificar los libros reservaods e imprimir los que no
                 if (!idsLibrosPrestados.toList().contains(idLlibre)) {
-                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autors.toString());
+                    System.out.printf("%-6d| %-25s| %20s%n", idLlibre, titol, autor);
                 }
             }
 
