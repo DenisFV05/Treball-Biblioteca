@@ -244,74 +244,169 @@ public class Prestec {
 
             JSONArray jsonArrayLlibres = new JSONArray(contentLlibres);
         /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
-        for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
-            JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
 
-            // Dar formato a las variables de los prestamos
-            int id = prestec.getInt("id");
-            int idLlibre = prestec.getInt("idLlibre");
-            int idUsuari = prestec.getInt("idUsuari");
-            String dataPrestec = prestec.getString("dataPrestec");
-            String dataDevolucio = prestec.getString("dataDevolucio");
-        }
+                // Dar formato a las variables de los prestamos
+                int id = prestec.getInt("id");
+                int idLlibre = prestec.getInt("idLlibre");
+                int idUsuari = prestec.getInt("idUsuari");
+                String dataPrestec = prestec.getString("dataPrestec");
+                String dataDevolucio = prestec.getString("dataDevolucio");
+            }
 
     /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
-        // Header de la lista de usuarios
-        System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
-        System.out.println("--------------------------------------------------------");
+            // Header de la lista de usuarios
+            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            System.out.println("--------------------------------------------------------");
 
-        // Iterar los usuarios
-        for (int i = 0; i < jsonArrayUsuaris.length(); i++) {
-            JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
+            // Iterar los usuarios
+            for (int i = 0; i < jsonArrayUsuaris.length(); i++) {
+                JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
 
-            // Dar formato a las variables de los usuarios
-            int idUsuari = usuari.getInt("idUsuari");
-            String nom = usuari.getString("nom");
-            String cognoms = usuari.getString("cognoms");
-            int telefon = usuari.getInt("telefon");
+                // Dar formato a las variables de los usuarios
+                int idUsuari = usuari.getInt("idUsuari");
+                String nom = usuari.getString("nom");
+                String cognoms = usuari.getString("cognoms");
+                int telefon = usuari.getInt("telefon");
 
-            // Imprimir los datos de los usuarios
-            System.out.printf("%-6d| %-15s| %-20s| %-10d%n", idUsuari, nom, cognoms, telefon);
+                // Imprimir los datos de los usuarios
+                System.out.printf("%-6d| %-15s| %-20s| %-10d%n", idUsuari, nom, cognoms, telefon);
+            }
+        
+            // Solicitar el ID y verificar el Input
+            int selectUsuariId = -1; // Se añade un valor no valido para que salte el comprobante
+            boolean inputValido = false;
+            while (!inputValido){
+                System.out.println("\nIntrodueix l'ID d'un usuari per seleccionar-lo: ");
+
+                try {
+                    selectUsuariId = scanner.nextInt();
+                    inputValido = true; // Si el selectUsuariId es un (int) es = true
+                    
+                } catch (Exception e) {
+                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                    scanner.nextLine();
+                }
+            }
+
+            // Buscar el usuario en base el ID seleccionado
+            JSONObject usuariSeleccionado = null;
+            for (int i = 0; i < jsonArrayUsuaris.length(); i++){
+                JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
+                int idUsuari = usuari.getInt("idUsuari");
+
+                // Si encuentra el ID escrito en usuari.json
+                if(idUsuari == selectUsuariId) {
+                    // [GUARDADO]
+                    usuariSeleccionado = usuari; // Donde se guardara el usuario para mas tarde
+                }
+            }
+            // Si no se encuentra el ID (Mensajes)
+            if (usuariSeleccionado == null) {
+                System.out.println("No s'ha trobat l'usuari amb l'ID: " + selectUsuariId + "\n");
+                Menu.menuPrestecs(scanner);
+            } else {
+                String nom = usuariSeleccionado.getString("nom");
+                System.out.println("L'usuari amb ID: " +"["+selectUsuariId+"]"+" "+nom+","+" ha estat seleccionat.");
+            }
+
+            // Mostrar los libros que tiene en prestamo el usuario seleccionado.
+
+            // Header del usuario seleccionado
+            String nom = usuariSeleccionado.getString("nom");
+            System.out.println("\nLLibres en préstec de l'usuari " + nom + ".");
+            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("-------------------------------------------------------");
+
+            // Almacenar los ID de los libros prestados del usuario seleccionado
+            Set<Integer> librosPrestadosPorUsuario = new HashSet<>();
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+                int idUsuariPrestado = prestec.getInt("idUsuari");
+                int idLlibre = prestec.getInt("idLlibre");
+                
+                // Si el libro esta prestado al usuario seleccionado se agregara a la lista
+                if (idUsuariPrestado == selectUsuariId) {
+                    librosPrestadosPorUsuario.add(idLlibre);
+                }
+            }
+            
+            // Verificar si el usuario tiene libros prestados
+            if (librosPrestadosPorUsuario.isEmpty()){
+                System.out.println(nom +","+ " no tens cap llibre en préstec\n");
+                Menu.menuPrestecs(scanner);
+            } else {
+                // Iterar libros
+                boolean librosEncontrados = false;
+                for (int i = 0; i < jsonArrayLlibres.length(); i++){
+                    JSONObject llibre = jsonArrayLlibres.getJSONObject(i);
+                    int idLlibre = llibre.getInt("idLlibre");
+
+                    // Si el libro esta prestado, mostrarlo
+                    if (librosPrestadosPorUsuario.contains(idLlibre)) {
+                        String titol = llibre.getString("titol");
+                        JSONArray autorsArray = llibre.getJSONArray("autor");
+                        StringBuilder autors = new StringBuilder();
+                        for (int j = 0; j < autorsArray.length(); j++) {
+                            if (j > 0) {
+                                autors.append(", ");
+                            }
+                            autors.append(autorsArray.getString(j));
+                        }
+                         // Imprimir los libros
+                        System.out.printf("%-6d| %-25s| %-30s%n", idLlibre, titol, autors.toString());
+                        librosEncontrados = true;
+                    }
+
+                    // Si no encuentra ningun libro (por algún fallo)
+                    if (!librosEncontrados) {
+                        System.out.println("");
+                    }
+                }
+                System.out.println("\n Introdueix l'ID del llibre per retornar-lo: ");
+                int selectLlibreId = 1;
+                boolean inputLibroValido = false;
+                while (!inputLibroValido) {
+                    try {
+                        selectLlibreId = scanner.nextInt();
+                        if (selectLlibreId == 0) {
+                            break;
+                        }
+                        if (librosPrestadosPorUsuario.contains(selectLlibreId)) {
+                            inputLibroValido = true;
+                        } else {
+                            System.out.println(nom +"," + "no tens cap llibre per retornar.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                        scanner.nextLine();
+                    }
+                }
+            
+
+            // Eliminar el préstamo del archivo prestec.json
+            JSONArray nuevoArrayPrestecs = new JSONArray();
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+                if (prestec.getInt("idLlibre") != selectLlibreId || prestec.getInt("idUsuari") != selectUsuariId) {
+                    nuevoArrayPrestecs.put(prestec);
+                }
+            }
+
+            // Escribir los cambios
+            try (FileWriter file = new FileWriter(filePathPrestecs)) {
+                file.write(nuevoArrayPrestecs.toString(4));
+                System.out.println("El llibre ha sigut retornat." );
+            }
+            
+        }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         
-        // Solicitar el ID y verificar el Input
-        int selectUsuariId = -1; // Se añade un valor no valido para que salte el comprobante
-        boolean inputValido = false;
-        while (!inputValido){
-            System.out.println("\nIntrodueix l'ID d'un usuari per seleccionar-lo: ");
-
-            try {
-                selectUsuariId = scanner.nextInt();
-                inputValido = true; // Si el selectUsuariId es un (int) es = true
-                
-            } catch (Exception e) {
-                System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
-                scanner.nextLine();
-            }
-        }
-
-        // Buscar el usuario en base el ID seleccionado
-        JSONObject usuariSeleccionado = null;
-        for (int i = 0; i < jsonArrayUsuaris.length(); i++){
-            JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
-            int idUsuari = usuari.getInt("idUsuari");
-
-            // Si encuentra el ID escrito en usuari.json
-            if(idUsuari == selectUsuariId) {
-                // [GUARDADO]
-                usuariSeleccionado = usuari; // Donde se guardara el usuario para mas tarde
-            }
-        }
-        // Si no se encuentra el ID (Mensajes)
-        if (usuariSeleccionado == null) {
-            System.out.println("No s'ha trobat l'usuari amb l'ID: " + selectUsuariId + "\n");
-            Menu.menuPrestecs(scanner);
-        } else {
-            String nom = usuariSeleccionado.getString("nom");
-            System.out.println("L'usuari amb ID: " +"["+selectUsuariId+"]"+" "+nom+","+" ha estat seleccionat.");
-        }
-        } catch (Exception e) {
-        }
     }
 }
