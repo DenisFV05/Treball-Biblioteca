@@ -202,6 +202,7 @@ public class Prestec {
             // Si no se encuentra el ID (Mensajes)
             if (llibreSeleccionado == null){
                 System.out.println("No s'ha trobat el llibre amb l'ID: " + selectLibroId + "\n");
+                return;
             } else {
                 String titol = llibreSeleccionado.getString("titol");
                 System.out.println("El llibre amb l'ID: " +"["+selectLibroId+"]"+" "+titol+","+" ha estat seleccionat.");
