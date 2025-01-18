@@ -79,7 +79,7 @@ public class Menu {
                         menuModificarLibros(scanner);
                         break;
                     case 3:
-                        // Eliminar llibre
+                        Llibres.eliminarLlibre();
                         break;
                     case 4:
                         limpiarPantalla();
