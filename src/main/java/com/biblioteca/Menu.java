@@ -117,16 +117,16 @@ public class Menu {
 
                 switch (optListarLibros) {
                     case 1:
-                        Llibres.llistatLlibres();
+                        // Llistar tots els llibres
                         break;
                     case 2:
-                        Llibres.llistatLlibresPrestec();
+                        // Llistar llibres en préstec
                         break;
                     case 3:
-                        Llibres.llistatLlibresAutor();
+                        // Llistar per autor
                         break;
                     case 4:
-                        Llibres.llistatLlibresTitol();
+                        // Cercar títol
                         break;
                     case 0:
                         limpiarPantalla();
@@ -340,11 +340,9 @@ public class Menu {
                 
                 switch (optPrestecs) {
                     case 1:
-                        limpiarPantalla();
                         Prestec.prestecFuncionAgafarNouLlibre(scanner);
                         break;
                     case 2:
-                        limpiarPantalla();
                         Prestec.prestecFuncionRetornarLlibre(scanner);
                         break;
                     case 0:
