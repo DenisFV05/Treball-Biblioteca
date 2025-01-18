@@ -210,6 +210,9 @@ public class Llibres {
         
             // Convertim el contingut a JSONArray
             JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Boolen per comprovar si es troba
+            boolean comprovarParaulaTitol = false;
         
             //Iterem per accedir a cadascun dels llibres
             for (int i = 0; i < llibres.length(); i++){
@@ -231,6 +234,10 @@ public class Llibres {
         
                 // Si trobem la paraula introduida en algun titol, mostrem el id, titol i autor/autors del llibre
                 if ((titol.toLowerCase()).contains((paraulaTitol.toLowerCase()))){
+                    
+                    // Cambiem el boolea per saber que s'ha trobat la paraula
+                    comprovarParaulaTitol = true;
+
                     System.out.printf("%-5d | %-45s | ", id, titol);
                     for (int j = 0; j < autor.length(); j++){
                         if (j != 0){
@@ -247,6 +254,9 @@ public class Llibres {
                         System.out.println("-".repeat(100));
                     }
                 }
+            }
+            if (!comprovarParaulaTitol){
+                System.out.println("No s'ha trobat la paraula en cap titol!");
             }
         } catch (Exception e) {
             e.printStackTrace();
