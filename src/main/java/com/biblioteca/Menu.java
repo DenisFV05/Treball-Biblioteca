@@ -308,10 +308,13 @@ public class Menu {
 
                 switch (optListarLibros) {
                     case 1:
+                        Usuari.llistatUsuaris();
                         break;
                     case 2:
+                        Usuari.llistatUsuarisPrestecsActius();
                         break;
                     case 3:
+                        Usuari.llistatUsuarisPrestecsForaDeTermini();
                         break;
                     case 0:
                         limpiarPantalla();

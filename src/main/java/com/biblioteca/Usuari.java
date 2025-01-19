@@ -3,6 +3,8 @@ package com.biblioteca;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -214,18 +216,6 @@ public class Usuari {
     
     
     
-    
-
-    // Buscar un usuari per id
-    private static JSONObject buscarUsuariPerId(JSONArray usuaris, int idUsuari) {
-        for (int i = 0; i < usuaris.length(); i++) { // Bucle para encontrar el usuario
-            JSONObject usuari = usuaris.getJSONObject(i);
-            if (usuari.getInt("idUsuari") == idUsuari) {
-                return usuari;
-            }
-        }
-        return null; // Si no es troba l'usuari
-    }
 
     public static void eliminarUsuari() {
         Scanner scanner = new Scanner(System.in);
@@ -256,7 +246,129 @@ public class Usuari {
         }
     }
     
-    
+    // Método para listar todos los usuarios
+    public static void llistatUsuaris() {
+        try {
+            String rutaJsonUsuaris = "src/main/json/usuaris.json";
+            String contingutUsuaris = new String(Files.readAllBytes(Paths.get(rutaJsonUsuaris)));
+            
+            JSONArray usuaris = new JSONArray(contingutUsuaris);
+
+            System.out.println("-".repeat(30) + " LLISTAT D'USUARIS " + "-".repeat(30));
+            System.out.printf("%-10s | %-20s | %-20s | %-15s%n", "ID", "Nom", "Cognoms", "Telèfon");
+            System.out.println("-".repeat(80));
+
+            for (int i = 0; i < usuaris.length(); i++) {
+                JSONObject usuari = usuaris.getJSONObject(i);
+                int id = usuari.getInt("idUsuari");
+                String nom = usuari.getString("nom");
+                String cognoms = usuari.getString("cognoms");
+                Object telefonObj = usuari.get("telefon");
+                String telefon = telefonObj.toString(); // Convertimos cualquier tipo a String
+
+                System.out.printf("%-10d | %-20s | %-20s | %-15s%n", id, nom, cognoms, telefon);
+            }
+            System.out.println();
+        } catch (Exception e) {
+            System.err.println("Error al llistar els usuaris: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Método para listar usuarios con préstamos activos
+    public static void llistatUsuarisPrestecsActius() {
+        try {
+            String rutaJsonPrestecs = "src/main/json/prestecs.json";
+            String contingutPrestecs = new String(Files.readAllBytes(Paths.get(rutaJsonPrestecs)));
+
+            String rutaJsonUsuaris = "src/main/json/usuaris.json";
+            String contingutUsuaris = new String(Files.readAllBytes(Paths.get(rutaJsonUsuaris)));
+
+            JSONArray prestecs = new JSONArray(contingutPrestecs);
+            JSONArray usuaris = new JSONArray(contingutUsuaris);
+
+            System.out.println("-".repeat(30) + " USUARIS AMB PRÉSTECS ACTIUS " + "-".repeat(30));
+            System.out.printf("%-10s | %-20s | %-20s | %-15s%n", "ID", "Nom", "Cognoms", "Telèfon");
+            System.out.println("-".repeat(80));
+
+            for (int i = 0; i < usuaris.length(); i++) {
+                JSONObject usuari = usuaris.getJSONObject(i);
+                int idUsuari = usuari.getInt("idUsuari");
+
+                boolean tePrestecActiu = false;
+                for (int j = 0; j < prestecs.length(); j++) {
+                    JSONObject prestec = prestecs.getJSONObject(j);
+                    if (prestec.getInt("idUsuari") == idUsuari && prestec.isNull("dataDevolucio")) {
+                        tePrestecActiu = true;
+                        break;
+                    }
+                }
+
+                if (tePrestecActiu) {
+                    String nom = usuari.getString("nom");
+                    String cognoms = usuari.getString("cognoms");
+                    Object telefonObj = usuari.get("telefon");
+                    String telefon = telefonObj.toString(); // Convertimos cualquier tipo a String
+
+                    System.out.printf("%-10d | %-20s | %-20s | %-15s%n", idUsuari, nom, cognoms, telefon);
+                }
+            }
+            System.out.println();
+        } catch (Exception e) {
+            System.err.println("Error al llistar els usuaris amb préstecs actius: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Método para listar usuarios con préstamos fuera de término
+    public static void llistatUsuarisPrestecsForaDeTermini() {
+        try {
+            String rutaJsonPrestecs = "src/main/json/prestecs.json";
+            String contingutPrestecs = new String(Files.readAllBytes(Paths.get(rutaJsonPrestecs)));
+
+            String rutaJsonUsuaris = "src/main/json/usuaris.json";
+            String contingutUsuaris = new String(Files.readAllBytes(Paths.get(rutaJsonUsuaris)));
+
+            JSONArray prestecs = new JSONArray(contingutPrestecs);
+            JSONArray usuaris = new JSONArray(contingutUsuaris);
+
+            LocalDate avui = LocalDate.now();
+
+            System.out.println("-".repeat(30) + " USUARIS AMB PRÉSTECS FORA DE TERMINI " + "-".repeat(30));
+            System.out.printf("%-10s | %-20s | %-20s | %-15s%n", "ID", "Nom", "Cognoms", "Telèfon");
+            System.out.println("-".repeat(80));
+
+            for (int i = 0; i < usuaris.length(); i++) {
+                JSONObject usuari = usuaris.getJSONObject(i);
+                int idUsuari = usuari.getInt("idUsuari");
+
+                boolean tePrestecForaDeTermini = false;
+                for (int j = 0; j < prestecs.length(); j++) {
+                    JSONObject prestec = prestecs.getJSONObject(j);
+                    if (prestec.getInt("idUsuari") == idUsuari) {
+                        LocalDate dataDevolucio = LocalDate.parse(prestec.getString("dataDevolucio"), DateTimeFormatter.ISO_DATE);
+                        if (dataDevolucio.isBefore(avui)) {
+                            tePrestecForaDeTermini = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (tePrestecForaDeTermini) {
+                    String nom = usuari.getString("nom");
+                    String cognoms = usuari.getString("cognoms");
+                    Object telefonObj = usuari.get("telefon");
+                    String telefon = telefonObj.toString(); // Convertimos cualquier tipo a String
+
+                    System.out.printf("%-10d | %-20s | %-20s | %-15s%n", idUsuari, nom, cognoms, telefon);
+                }
+            }
+            System.out.println();
+        } catch (Exception e) {
+            System.err.println("Error al llistar els usuaris amb préstecs fora de termini: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
         
 }
