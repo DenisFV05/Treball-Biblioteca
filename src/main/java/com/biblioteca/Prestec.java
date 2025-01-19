@@ -64,7 +64,7 @@ public class Prestec {
         /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
             // Header de la lista de usuarios
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            System.out.println("\nID    | Nom            | Cognoms             | Telefon");
             System.out.println("--------------------------------------------------------");
 
             // Iterar los usuarios
@@ -92,7 +92,7 @@ public class Prestec {
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
                     
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar l'usuari.");
                     scanner.nextLine();
                 }
             }
@@ -130,7 +130,7 @@ public class Prestec {
             // Si el usuario tiene +4 prestamos, impedirle el prestamo
             if(numLibrosPrestados >= 4) {
                 String nom = usuariSeleccionado.getString("nom");
-                System.out.println("\n"+nom + "," + "ja tens 4 llibres prestats. No pots agafar-ne més"+"\n");
+                System.out.println("\n"+nom + "," + "ja tens 4 llibres prestats. No pots agafar-ne mes"+"\n");
                 Menu.menuPrestecs(scanner);
                 return;
             }
@@ -139,7 +139,7 @@ public class Prestec {
         ///////////////////////////////////// [ LISTAR LIBROS DISPONIBLES] /////////////////////////////////////////////
 
             // Header de la lista de libros disponibles
-            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("\nID    | Titol                    | Autor");
             System.out.println("-------------------------------------------------------");
             
             // Iterar los libros
@@ -182,7 +182,7 @@ public class Prestec {
                     selectLibroId = scanner.nextInt();
                     inputLibroValido = true;
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar el llibre.");
                     scanner.nextLine();
                 }
             }
@@ -233,7 +233,7 @@ public class Prestec {
             // Guardamos el nuevo contenido en el archivo
             Files.write(Paths.get(filePathPrestecs), jsonArrayPrestecs.toString(4).getBytes());
             
-            System.out.println("\nLa data de devolució és: " + dataDevolucioStr + "\n");
+            System.out.println("\nLa data de devolucio es: " + dataDevolucioStr + "\n");
             
 
         } catch (Exception e) {
@@ -292,7 +292,7 @@ public class Prestec {
     /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
             // Header de la lista de usuarios
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            System.out.println("\nID    | Nom            | Cognoms             | Telefon");
             System.out.println("--------------------------------------------------------");
 
             // Iterar los usuarios
@@ -320,7 +320,7 @@ public class Prestec {
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
                     
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar l'usuari.");
                     scanner.nextLine();
                 }
             }
@@ -350,8 +350,8 @@ public class Prestec {
 
             // Header del usuario seleccionado
             String nom = usuariSeleccionado.getString("nom");
-            System.out.println("\nLLibres en préstec de l'usuari " + nom + ".");
-            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("\nLLibres en prestec de l'usuari " + nom + ".");
+            System.out.println("\nID    | Titol                    | Autor");
             System.out.println("-------------------------------------------------------");
 
             // Almacenar los ID de los libros prestados del usuario seleccionado
@@ -369,7 +369,7 @@ public class Prestec {
             
             // Verificar si el usuario tiene libros prestados
             if (librosPrestadosPorUsuario.isEmpty()){
-                System.out.println(nom +","+ " no tens cap llibre en préstec\n");
+                System.out.println(nom +","+ " no tens cap llibre en prestec\n");
                 Menu.menuPrestecs(scanner);
             } else {
                 // Iterar libros
@@ -414,7 +414,7 @@ public class Prestec {
                             System.out.println(nom +"," + "no tens cap llibre per retornar.");
                         }
                     } catch (Exception e) {
-                        System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                        System.out.println("Error: Has d'introduir un numero valid per seleccionar el llibre.");
                         scanner.nextLine();
                     }
                 }
