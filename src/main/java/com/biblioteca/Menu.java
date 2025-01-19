@@ -193,10 +193,11 @@ public class Menu {
 
                 switch (optUsuarios) {
                     case 1:
+                        Usuari.crearUsuari();
                         break;
                     case 2:
                         limpiarPantalla();
-                        menuModificarUsuarios(scanner);
+                        Usuari.modificarUsuari();
                         break;
                     case 3:
                         break;

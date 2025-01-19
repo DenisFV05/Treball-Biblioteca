@@ -37,19 +37,19 @@ public class Usuari {
         try {
             JSONArray usuaris = llegirFitxerJson();
 
-            System.out.print("Introdueix el nom de l'usuari: "); // Pregunta y valida
+            System.out.print("\nIntrodueix el nom de l'usuari: "); // Pregunta y valida
             String nom = validarNom(scanner);
 
-            System.out.print("Introdueix el primer cognom: "); // Pregunta y valida
+            System.out.print("\nIntrodueix el primer cognom: "); // Pregunta y valida
             String primerCognom = validarNom(scanner);
 
-            System.out.print("Introdueix el segon cognom: "); // Pregunta y valida
+            System.out.print("\nIntrodueix el segon cognom: "); // Pregunta y valida
             String segonCognom = validarNom(scanner);
 
-            System.out.print("Introdueix el telèfon de l'usuari: "); // Pregunta y valida
+            System.out.print("\nIntrodueix el telèfon de l'usuari: "); // Pregunta y valida
             String telefon = validarTelefon(scanner);
 
-            System.out.print("Vols guardar aquest usuari? (s/n): ");
+            System.out.print("\nVols guardar aquest usuari? (s/n): ");
             String confirmacio = scanner.nextLine().trim().toLowerCase(); // Se confirma los datos del scanner
 
             if (confirmacio.equals("s")) { // Si la respuesta es si
@@ -64,32 +64,37 @@ public class Usuari {
                 usuaris.put(nouUsuari); // Se introducen en el json
                 escriureFitxerJson(usuaris); // Se escribe en el json
 
-                System.out.println("Usuari afegit correctament.");
+                System.out.println("\nUsuari afegit correctament.");
             } else { // Si escribimos no o lo que sea
-                System.out.println("Usuari no desat.");
+                System.out.println("\nUsuari no desat.");
             }
         } finally {
-            scanner.close(); // Se cierra el scanner
+            // NO SE CIERRA EL SCANNER QUE DA PROBLEMAS
         }
     }
 
     // Valida el nom o cognom introduït per l'usuari
     private static String validarNom(Scanner scanner) {
         String entrada;
-        do {
-            System.out.print("Entrada no vàlida. Introdueix un valor vàlid (mínim 4 caràcters, sense espais): ");
-            entrada = scanner.nextLine().trim(); // Da error y vuelve a preguntar
-        } while (entrada.isEmpty() || entrada.length() < 4 || entrada.contains(" ")); // Mientras el nombre este vacio, sea muy corto o tenga espacio
+        System.out.print("Introdueix el nom (mínim 4 caràcters, sense espais): ");
+        entrada = scanner.nextLine().trim(); // Obtenemos la entrada del nombre
+        while (entrada.isEmpty() || entrada.length() < 4 || entrada.contains(" ")) { // Mientras el nombre este vacio, sea muy corto o tenga espacio
+            System.out.println("Entrada no vàlida. Introdueix un valor vàlid (mínim 4 caràcters, sense espais):");
+            entrada = scanner.nextLine().trim(); // Repetimos la pregunta
+        }
         return entrada.substring(0, 1).toUpperCase() + entrada.substring(1).toLowerCase(); // Si esta bien devuelve String primera letra en mayus y el resto en minus
     }
 
     // Valida que el telèfon sigui correcte
     private static String validarTelefon(Scanner scanner) {
         String entrada;
-        do {
+        // Primero pedimos la entrada y luego validamos.
+        System.out.print("Introdueix el telèfon (9 dígits): ");
+        entrada = scanner.nextLine().trim(); // Obtenemos la entrada del nombre
+        while (!entrada.matches("\\d{9}")) {// verifica si la cadena contiene exactamente 9 digitos consecutivos, \\d es cualquier digito 0-9
             System.out.print("Entrada no vàlida. Introdueix un telèfon vàlid (9 dígits): ");
-            entrada = scanner.nextLine().trim(); // Da error y vuelve a preguntar
-        } while (!entrada.matches("\\d{9}")); // verifica si la cadena contiene exactamente 9 digitos consecutivos, \\d es cualquier digito 0-9
+            entrada = scanner.nextLine().trim(); // Repetimos la pregunta
+        } 
         return entrada;
     }
 
