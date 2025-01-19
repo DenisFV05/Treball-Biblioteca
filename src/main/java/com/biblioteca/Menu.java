@@ -200,6 +200,7 @@ public class Menu {
                         Usuari.modificarUsuari();
                         break;
                     case 3:
+                        Usuari.eliminarUsuari();
                         break;
                     case 4:
                         limpiarPantalla();
