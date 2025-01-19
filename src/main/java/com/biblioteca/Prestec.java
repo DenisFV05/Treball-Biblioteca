@@ -13,7 +13,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Prestec {
-    public static void prestecFuncionAgafarNouLlibre(Scanner scanner){
+
+    
+    /**
+     *  Explicació de la funció "prestecFuncionAgafarNouLlibre"
+     * 
+     * @param scanner (Hagafa l'input del usuari per escollir l'ID d'un usuari i l'ID d'un llibre)
+     * En aquesta funció no cal el "return" ya que la funció fa el préstec, informa al usuari
+     * 
+     * [FUNCIÓ]
+     * Primer. Fa el set-up dels arxius .json per poder modificarlos.
+     * Segon. Itera l'arxiu usuaris.json i es fa una tabla amb tots el usuaris.
+     * Tercer. Escollir l'ID del usuari que vols seleccionar per fer el préstec.
+     * Quart. Itera l'arxiu llibres.json i es fa una tabla amb tots el llibres disponibles.
+     * Cinquè. Escollir l'ID del llibre que vols seleccionar per fer el préstec.
+     * Sisè. Es crea un nou objecte a l'arxiu prestecs.json y et dona la data de retorn.
+     * @exception Controla que si n'hi ha un error puguis saber quin error ha sigut.
+     */
+
+     public static void prestecFuncionAgafarNouLlibre(Scanner scanner){
         try {
             // Variables del archivo (prestecs.json)
             String filePathPrestecs = "./src/main/json/prestecs.json";
@@ -48,7 +66,7 @@ public class Prestec {
         /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
             // Header de la lista de usuarios
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            System.out.println("\nID    | Nom            | Cognoms             | Telefon");
             System.out.println("--------------------------------------------------------");
 
             // Iterar los usuarios
@@ -76,7 +94,7 @@ public class Prestec {
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
                     
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar l'usuari.");
                     scanner.nextLine();
                 }
             }
@@ -101,12 +119,29 @@ public class Prestec {
                 String nom = usuariSeleccionado.getString("nom");
                 System.out.println("L'usuari amb ID: " +"["+selectUsuariId+"]"+" "+nom+","+" ha estat seleccionat.");
             }
+
+            // Verificar la cantidad de libros prestados por el usuario
+            int numLibrosPrestados = 0;
+            for (int i = 0; i < jsonArrayPrestecs.length(); i++) {
+                JSONObject prestec = jsonArrayPrestecs.getJSONObject(i);
+                if (prestec.getInt("idUsuari") == selectUsuariId) {
+                    numLibrosPrestados++; // Se suma [1] a la variable "numLibrosPrestados"
+                }   
+            }
+
+            // Si el usuario tiene +4 prestamos, impedirle el prestamo
+            if(numLibrosPrestados >= 4) {
+                String nom = usuariSeleccionado.getString("nom");
+                System.out.println("\n"+nom + "," + "ja tens 4 llibres prestats. No pots agafar-ne mes"+"\n");
+                Menu.menuPrestecs(scanner);
+                return;
+            }
             
 
         ///////////////////////////////////// [ LISTAR LIBROS DISPONIBLES] /////////////////////////////////////////////
 
             // Header de la lista de libros disponibles
-            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("\nID    | Titol                    | Autor");
             System.out.println("-------------------------------------------------------");
             
             // Iterar los libros
@@ -149,7 +184,7 @@ public class Prestec {
                     selectLibroId = scanner.nextInt();
                     inputLibroValido = true;
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar el llibre.");
                     scanner.nextLine();
                 }
             }
@@ -169,6 +204,7 @@ public class Prestec {
             // Si no se encuentra el ID (Mensajes)
             if (llibreSeleccionado == null){
                 System.out.println("No s'ha trobat el llibre amb l'ID: " + selectLibroId + "\n");
+                return;
             } else {
                 String titol = llibreSeleccionado.getString("titol");
                 System.out.println("El llibre amb l'ID: " +"["+selectLibroId+"]"+" "+titol+","+" ha estat seleccionat.");
@@ -199,7 +235,7 @@ public class Prestec {
             // Guardamos el nuevo contenido en el archivo
             Files.write(Paths.get(filePathPrestecs), jsonArrayPrestecs.toString(4).getBytes());
             
-            System.out.println("\nLa data de devolució és: " + dataDevolucioStr);
+            System.out.println("\nLa data de devolucio es: " + dataDevolucioStr + "\n");
             
 
         } catch (Exception e) {
@@ -209,7 +245,20 @@ public class Prestec {
         }
     }
 
-
+    /**
+     *  Explicació de la funció "prestecFuncionRetornarLlibre 
+     * @param scanner (Hagafa l'input del usuari per escollir l'ID d'un usuari i l'ID d'un llibre)
+     * En aquesta funció no cal el "return" ya que la funció retorna al préstec, informa al usuari
+     * 
+     * [FUNCIÓ]
+     * Primer. Fa el set-up dels arxius .json per poder modificarlos.
+     * Segon. Itera l'arxiu usuaris.json i es fa una tabla amb tots el usuaris.
+     * Tercer. Escollir l'ID del usuari que vols seleccionar per fer el retorn.
+     * Quart. Itera l'arxiu llibres.json i es fa una tabla amb els llibres que té l'usuari.
+     * Cinquè. Escollir l'ID del llibre que vols seleccionar per retornar el préstec.
+     * Sisè. S'elimina el objecte del prestecs.json, a més d'informar al usuari.
+     * @exception Controla que si n'hi ha un error puguis saber quin error ha sigut.
+     */
     
     public static void prestecFuncionRetornarLlibre (Scanner scanner){
         try {
@@ -245,7 +294,7 @@ public class Prestec {
     /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
 
             // Header de la lista de usuarios
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            System.out.println("\nID    | Nom            | Cognoms             | Telefon");
             System.out.println("--------------------------------------------------------");
 
             // Iterar los usuarios
@@ -273,7 +322,7 @@ public class Prestec {
                     inputValido = true; // Si el selectUsuariId es un (int) es = true
                     
                 } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
+                    System.out.println("Error: Has d'introduir un numero valid per seleccionar l'usuari.");
                     scanner.nextLine();
                 }
             }
@@ -303,8 +352,8 @@ public class Prestec {
 
             // Header del usuario seleccionado
             String nom = usuariSeleccionado.getString("nom");
-            System.out.println("\nLLibres en préstec de l'usuari " + nom + ".");
-            System.out.println("\nID    | Títol                    | Autor");
+            System.out.println("\nLLibres en prestec de l'usuari " + nom + ".");
+            System.out.println("\nID    | Titol                    | Autor");
             System.out.println("-------------------------------------------------------");
 
             // Almacenar los ID de los libros prestados del usuario seleccionado
@@ -322,7 +371,7 @@ public class Prestec {
             
             // Verificar si el usuario tiene libros prestados
             if (librosPrestadosPorUsuario.isEmpty()){
-                System.out.println(nom +","+ " no tens cap llibre en préstec\n");
+                System.out.println(nom +","+ " no tens cap llibre en prestec\n");
                 Menu.menuPrestecs(scanner);
             } else {
                 // Iterar libros
@@ -367,7 +416,7 @@ public class Prestec {
                             System.out.println(nom +"," + "no tens cap llibre per retornar.");
                         }
                     } catch (Exception e) {
-                        System.out.println("Error: Has d'introduir un número vàlid per seleccionar el llibre.");
+                        System.out.println("Error: Has d'introduir un numero valid per seleccionar el llibre.");
                         scanner.nextLine();
                     }
                 }
@@ -385,7 +434,7 @@ public class Prestec {
             // Escribir los cambios
             try (FileWriter file = new FileWriter(filePathPrestecs)) {
                 file.write(nuevoArrayPrestecs.toString(4));
-                System.out.println("El llibre ha sigut retornat." );
+                System.out.println("\nEl llibre ha sigut retornat.\n" );
             }
             
         }

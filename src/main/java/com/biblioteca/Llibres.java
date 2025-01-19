@@ -1,7 +1,10 @@
 package com.biblioteca;
 
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -143,13 +146,11 @@ public class Llibres {
             
             // Convertim el contingut a un JSONArray
             JSONArray llibres = new JSONArray(contingutLlibres);
-        
-            // Mostrem la capçelera de la llista
-            System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER AUTOR" + "    " + "-".repeat(33));
-            System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
-            System.out.println();
-            System.out.println("-".repeat(100));
+            
+            // Boolean per mostrar la capçelera si es troba algun llibre
+            boolean mostrarCapçelera = false;
 
+            // Boolean per saber si es troba algun llibre, sino mostrarem un missatge
             boolean llibreTrobat = false;
 
             // Iterem per accedir a cadasucn dels llibres
@@ -165,6 +166,15 @@ public class Llibres {
                 // Si l'autor introduit es troba, es mostren les dades d'aquest
                 for (int j = 0; j < autor.length(); j++){
                     if ((autor.getString(j).toLowerCase()).contains(autorIntroduit.toLowerCase())){
+                        // Mostrem la capçelera
+                        if(!mostrarCapçelera){
+                            // Mostrem la capçelera de la llista
+                            System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER AUTOR" + "    " + "-".repeat(33));
+                            System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
+                            System.out.println();
+                            System.out.println("-".repeat(100));
+                            mostrarCapçelera = true;
+                        }
                         // Sabem que s'ha trobat almenys un llibre de l'autor, per tant, no mostrarem missatge de que no s'ha trobat cap llibre
                         llibreTrobat = true;
                         System.out.printf("%-5s | %-45s | ", id, titol);
@@ -207,6 +217,12 @@ public class Llibres {
         
             // Convertim el contingut a JSONArray
             JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Boolean per mostrar la capçelera nomes si es troba algun llibre
+            boolean capçelera = false;
+
+            // Boolen per comprovar si es troba
+            boolean comprovarParaulaTitol = false;
         
             //Iterem per accedir a cadascun dels llibres
             for (int i = 0; i < llibres.length(); i++){
@@ -218,16 +234,20 @@ public class Llibres {
                 String titol = llibre.getString("titol");
                 JSONArray autor = llibre.getJSONArray("autor");
         
-                // Mostrem la capçelera de la llista
-                if (i == 0){
-                    System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER TITOL" + "    " + "-".repeat(33));
-                    System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
-                    System.out.println();
-                    System.out.println("-".repeat(100));
-                }
-        
                 // Si trobem la paraula introduida en algun titol, mostrem el id, titol i autor/autors del llibre
                 if ((titol.toLowerCase()).contains((paraulaTitol.toLowerCase()))){
+                    
+                    if (!capçelera){
+                        System.out.println("-".repeat(33) + "   " + "LLISTAT DE LLIBRES PER TITOL" + "    " + "-".repeat(33));
+                        System.out.printf("%-5s | %-45s | %-35s", "ID", "TITOL", "AUTOR");
+                        System.out.println();
+                        System.out.println("-".repeat(100));
+                        capçelera = true;
+                    }
+
+                    // Cambiem el boolea per saber que s'ha trobat la paraula
+                    comprovarParaulaTitol = true;
+
                     System.out.printf("%-5d | %-45s | ", id, titol);
                     for (int j = 0; j < autor.length(); j++){
                         if (j != 0){
@@ -245,7 +265,293 @@ public class Llibres {
                     }
                 }
             }
-        
+            if (!comprovarParaulaTitol){
+                System.out.println("No s'ha trobat la paraula en cap titol!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void afegirLlibre(){
+        try {
+            
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Demanem el titol i l'autor o autors del llibre a afegir
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Introdueix el titol del nou llibre: ");
+            String titolLlibreAfegir = scanner.nextLine();
+
+            System.out.print("Introdueix l'autor o els autors del nou llibre (Separats per comes ','): ");
+            String autors = scanner.nextLine();
+
+            // idLlibre ha de ser unic
+            int id = llibres.length() + 1;
+
+            if (!(autors.contains(","))){
+                // Afegim l'unic autor a format llista
+                List<String> llistaAutors = new ArrayList<>();
+                llistaAutors.add(autors);
+
+                // Afegim les claus al llibre
+                JSONObject nouLlibre = new JSONObject();
+
+                nouLlibre.put("idLlibre", id);
+                nouLlibre.put("titol", titolLlibreAfegir);
+                nouLlibre.put("autor", llistaAutors);
+
+                // Afegim el llibre al JSONArray
+                llibres.put(nouLlibre);
+
+                // Actualitzem el llibres.json
+                try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                    actulitzar.write(llibres.toString(4));
+                    actulitzar.flush();
+                }
+
+            } else {
+                // Afegim els autors a format llista
+                List<String> llistaAutors = new ArrayList<>();
+                for (String autor : autors.split(",")){
+                    llistaAutors.add(autor.trim());     // Treu espais innecessaris
+                }
+
+                // Afegim les claus al llibre
+                JSONObject nouLlibre = new JSONObject();
+
+                nouLlibre.put("idLlibre", id);
+                nouLlibre.put("titol", titolLlibreAfegir);
+                nouLlibre.put("autor", llistaAutors);
+
+                // Afegim el llibre al JSONArray
+                llibres.put(nouLlibre);
+
+                // Actualitzem el llibres.json
+                try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                    actulitzar.write(llibres.toString(4));
+                    actulitzar.flush();
+                }
+            }
+
+            System.out.printf("El llibre [%s] amb id [%d] escrit per [%s] s'ha afegit correctament", titolLlibreAfegir, id, autors);
+
+            // Salt de linea
+            System.out.println();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void modificarTitolLlibre(){
+        try {
+            
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Boolean de comprovació per saber si s'ha trobat l'id
+            boolean trobat = false;
+            
+            // Scanner per a introduir l'usuari
+            Scanner scanner = new Scanner(System.in);
+
+            while (!trobat) { 
+                // Demanem el id del llibre a modificar
+                System.out.print("Introdueix l'id del llibre que vols modificar: ");
+                int idLlibreModificar = scanner.nextInt();
+                scanner.nextLine();     // Consume el salto de linea pendiente
+
+                for (int i = 0; i < llibres.length(); i++){
+                    // Agafem cada llibre com a object
+                    JSONObject llibre = llibres.getJSONObject(i);
+
+                    // Comprovem si trobem l'id
+                    if (idLlibreModificar == llibre.getInt("idLlibre")){
+                        // Cambiem el nostre boolea de comprovació a true per sortir del bucle posteriorment
+                        trobat = true;
+
+                        // Mostrem les dades actuals del llibre
+                        System.out.println("Llibre trobat! El titol actual es: " + llibre.getString("titol"));
+
+                        // Demanem el nou titol
+                        System.out.print("Introdueix el nou titol: ");
+                        String titol = scanner.nextLine();
+                        
+
+                        // Cambiem els valors del JSONObject
+                        llibre.put("titol", titol);
+
+                        // Actualitzem el llibres.json
+                        try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                            actulitzar.write(llibres.toString(4));
+                            actulitzar.flush();
+                        }
+                        
+                        System.out.printf("El llibre amb id [%d] s'ha modificat correctament!\n", idLlibreModificar);
+                        break;      // Sortim del bucle
+                    }
+                }
+
+                // Si recorrem l'arxiu llibres.json i no trobem l'id, enviem missatge
+                if (!trobat){
+                    System.out.println("No s'ha trobat cap llibre amb aquest ID. Torna-ho a intentar");
+                }
+            }
+            System.out.println();       // Salt de linea per millorar la visualitzacio
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void modificarAutorLlibre(){
+        try {
+            
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Boolean de comprovació per saber si s'ha trobat l'id
+            boolean trobat = false;
+            
+            // Scanner per a introduir l'usuari
+            Scanner scanner = new Scanner(System.in);
+
+            while (!trobat) { 
+                // Demanem el id del llibre a modificar
+                System.out.print("Introdueix l'id del llibre que vols modificar: ");
+                int idLlibreModificar = scanner.nextInt();
+                scanner.nextLine();     // Consume el salto de linea pendiente
+
+                for (int i = 0; i < llibres.length(); i++){
+                    // Agafem cada llibre com a object
+                    JSONObject llibre = llibres.getJSONObject(i);
+
+                    // Comprovem si trobem l'id
+                    if (idLlibreModificar == llibre.getInt("idLlibre")){
+                        // Cambiem el nostre boolea de comprovació a true per sortir del bucle posteriorment
+                        trobat = true;
+
+                        // Mostrem les dades actuals del llibre
+                        if (llibre.getJSONArray("autor").length() > 1){
+                            System.out.println("Llibre trobat! Els autors actuals son: " + llibre.getJSONArray("autor").toString().replace(",", " /"));
+                        } else {
+                            System.out.println("Llibre trobat! L'autor actual es: " + llibre.getJSONArray("autor").toString());
+                        }
+
+                        // Demanem els nous autors
+                        System.out.print("Introdueix el nou autor o autors (Separats per comes): ");
+                        String autors = scanner.nextLine();
+                        
+                        // Comprobem si es mes d'un autor
+                        List<String> llistaAutors = new ArrayList<>();
+                        if (autors.contains(",")){
+                            for (String autor : autors.split(",")){
+                                llistaAutors.add(autor.trim());
+                            }
+                        } else {
+                            llistaAutors.add(autors.trim());
+                        }
+
+                        // Cambiem els valors del JSONObject
+                        llibre.put("autor", llistaAutors);
+
+                        // Actualitzem el llibres.json
+                        try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                            actulitzar.write(llibres.toString(4));
+                            actulitzar.flush();
+                        }
+                        
+                        System.out.printf("El llibre amb id [%d] s'ha modificat correctament!\n", idLlibreModificar);
+                        break;      // Sortim del bucle
+                    }
+                }
+
+                // Si recorrem l'arxiu llibres.json i no trobem l'id, enviem missatge
+                if (!trobat){
+                    System.out.println("No s'ha trobat cap llibre amb aquest ID. Torna-ho a intentar");
+                }
+            }
+            System.out.println();       // Salt de linea per millorar la visualitzacio
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void eliminarLlibre(){
+        try {
+            // Ruta de l'arxiu json llibres
+            String rutaJsonLlibres = "src/main/json/llibres.json";
+            String contingutLlibres = new String(Files.readAllBytes(Paths.get(rutaJsonLlibres)));
+
+            // Convertim el contingut a JSONArray
+            JSONArray llibres = new JSONArray(contingutLlibres);
+
+            // Scanner per a introduir l'usuari
+            Scanner scanner = new Scanner(System.in);
+
+            // Boolea per comprovar si s'ha trobat el llibre
+            boolean trobat = false;
+
+            // Demanem l'id del llibre a eliminar
+            System.out.print("Introdueix l'id del llibre que vols eliminar: ");
+            int idLlibreEliminar = scanner.nextInt();
+            scanner.nextLine();     // Consume el salto de linea pendiente
+
+            for (int i = 0; i < llibres.length(); i++){
+                // Agafem cada llibre com a object
+                JSONObject llibre = llibres.getJSONObject(i);
+
+                if (idLlibreEliminar == llibre.getInt("idLlibre")){
+                    // Cambiem el boolea
+                    trobat = true;
+
+                    // Mostrem el contingut del llibre
+                    System.out.println("El titol del llibre es: " + llibre.getString("titol"));
+                    if (llibre.getJSONArray("autor").length() > 1){
+                        System.out.println("Els autors son: " + llibre.getJSONArray("autor").toString().replace(",", " /"));
+                    } else {
+                        System.out.println("L'autor es: " + llibre.getJSONArray("autor").toString());
+                    }
+
+                    // Preguntem si es segur que vol eliminar el llibre
+                    System.out.println("Vols eliminar el llibre?");
+                    System.out.print("S / N: ");
+                    String comprovarEliminar = scanner.nextLine();
+
+                    if (comprovarEliminar.trim().equals("S") || comprovarEliminar.trim().equals("s")){
+                        // Eliminem el llibre
+                        llibres.remove(i);
+
+                        // Actualitzem el llibres.json
+                        try (FileWriter actulitzar = new FileWriter(rutaJsonLlibres)){
+                            actulitzar.write(llibres.toString(4));
+                            actulitzar.flush();
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (!trobat){
+                // Missatge per si el llibre no es trobat després de recòrrer la llista
+                System.out.println("L'id " + idLlibreEliminar + " no s'ha torbat!");
+            }
+            System.out.println();   // Salt de linea per a millorar la visualtizacio
         } catch (Exception e) {
             e.printStackTrace();
         }
