@@ -14,13 +14,6 @@
         "idUsuari": 3
     },
     {
-        "dataDevolucio": "2025-05-01",
-        "dataPrestec": "2025-04-01",
-        "idLlibre": 4,
-        "id": 4,
-        "idUsuari": 4
-    },
-    {
         "dataDevolucio": "2025-06-01",
         "dataPrestec": "2025-05-01",
         "idLlibre": 5,
@@ -110,5 +103,26 @@
         "idLlibre": 1,
         "id": 16,
         "idUsuari": 1
+    },
+    {
+        "dataDevolucio": "2025-02-02",
+        "dataPrestec": "2025-01-19",
+        "idLlibre": 20,
+        "id": 17,
+        "idUsuari": 1
+    },
+    {
+        "dataDevolucio": "2025-02-02",
+        "dataPrestec": "2025-01-19",
+        "idLlibre": 19,
+        "id": 18,
+        "idUsuari": 2
+    },
+    {
+        "dataDevolucio": "2024-02-02",
+        "dataPrestec": "2025-01-19",
+        "idLlibre": 4,
+        "id": 18,
+        "idUsuari": 20
     }
 ]

@@ -287,6 +287,8 @@ public class Usuari {
             JSONArray prestecs = new JSONArray(contingutPrestecs);
             JSONArray usuaris = new JSONArray(contingutUsuaris);
 
+            LocalDate avui = LocalDate.now();
+
             System.out.println("-".repeat(30) + " USUARIS AMB PRÉSTECS ACTIUS " + "-".repeat(30));
             System.out.printf("%-10s | %-20s | %-20s | %-15s%n", "ID", "Nom", "Cognoms", "Telèfon");
             System.out.println("-".repeat(80));
@@ -298,9 +300,12 @@ public class Usuari {
                 boolean tePrestecActiu = false;
                 for (int j = 0; j < prestecs.length(); j++) {
                     JSONObject prestec = prestecs.getJSONObject(j);
-                    if (prestec.getInt("idUsuari") == idUsuari && prestec.isNull("dataDevolucio")) {
-                        tePrestecActiu = true;
-                        break;
+                    if (prestec.getInt("idUsuari") == idUsuari) {
+                        LocalDate dataDevolucio = LocalDate.parse(prestec.getString("dataDevolucio"), DateTimeFormatter.ISO_DATE);
+                        if (dataDevolucio.isAfter(avui)) {
+                            tePrestecActiu = true;
+                            break;
+                        }
                     }
                 }
 
