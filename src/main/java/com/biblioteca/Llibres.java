@@ -399,7 +399,7 @@ public class Llibres {
                     System.out.println("No s'ha trobat cap llibre amb aquest ID. Torna-ho a intentar");
                 }
             }
-
+            System.out.println();       // Salt de linea per millorar la visualitzacio
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -476,7 +476,7 @@ public class Llibres {
                     System.out.println("No s'ha trobat cap llibre amb aquest ID. Torna-ho a intentar");
                 }
             }
-
+            System.out.println();       // Salt de linea per millorar la visualitzacio
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -541,6 +541,7 @@ public class Llibres {
                 // Missatge per si el llibre no es trobat després de recòrrer la llista
                 System.out.println("L'id " + idLlibreEliminar + " no s'ha torbat!");
             }
+            System.out.println();   // Salt de linea per a millorar la visualtizacio
         } catch (Exception e) {
             e.printStackTrace();
         }
