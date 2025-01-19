@@ -155,7 +155,13 @@ public class Usuari {
             System.out.print("Introdueix el nou nom (deixa en blanc per mantenir el valor actual): ");
             String nouNom = scanner.nextLine().trim();
             if (!nouNom.isEmpty()) {
-                nouNom = validarNom(scanner); // Solo validamos si no está vacío
+                // Validamos el nombre directamente aquí
+                while (nouNom.isEmpty() || nouNom.length() < 4 || nouNom.contains(" ")) {
+                    System.out.println("Entrada no vàlida. Introdueix un valor vàlid (mínim 4 caràcters, sense espais):");
+                    nouNom = scanner.nextLine().trim();
+                }
+                // Capitalizar primer letra
+                nouNom = nouNom.substring(0, 1).toUpperCase() + nouNom.substring(1).toLowerCase();
                 usuariSeleccionat.put("nom", nouNom);
             }
     
@@ -170,7 +176,11 @@ public class Usuari {
             System.out.print("Introdueix el nou telèfon (deixa en blanc per mantenir el valor actual): ");
             String nouTelefon = scanner.nextLine().trim();
             if (!nouTelefon.isEmpty()) {
-                nouTelefon = validarTelefon(scanner); // Solo validamos si no está vacío
+                // Validamos el teléfono aquí
+                while (!nouTelefon.matches("\\d{9}")) {
+                    System.out.print("Entrada no vàlida. Introdueix un telèfon vàlid (9 dígits): ");
+                    nouTelefon = scanner.nextLine().trim();
+                }
                 usuariSeleccionat.put("telefon", nouTelefon);
             }
     
@@ -183,6 +193,7 @@ public class Usuari {
             // no se cierra el scanner
         }
     }
+    
     
     
     
