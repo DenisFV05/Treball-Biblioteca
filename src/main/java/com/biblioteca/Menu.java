@@ -11,12 +11,12 @@ public class Menu {
         // MENÚ PRINCIPAL
         do {
             System.out.println("""
-                -- Gestió de biblioteca --
+                -- Gestio de biblioteca --
                 1. Llibres
                 2. Usuaris
-                3. Préstecs
+                3. Prestecs
                 0. Sortir
-                Escull una opció: """);
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optMain = scanner.nextInt();
 
@@ -37,10 +37,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n ");
+                System.out.println("Si us plau, ingressa un número valid.\n ");
                 scanner.next();
                 optMain = -1;
             }
@@ -60,13 +60,13 @@ public class Menu {
 
         do {
             System.out.println("""
-                -- Gestió de llibres --
+                -- Gestio de llibres --
                 1. Afegir
                 2. Modificar
                 3. Eliminar
                 4. Llistar
-                0. Tornar al menú principal
-                Escull una opció: """);
+                0. Tornar al menu principal
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optLibros = scanner.nextInt();
 
@@ -89,10 +89,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un número valid.\n");
                 scanner.next();
                 optLibros = -1;
             }
@@ -107,11 +107,11 @@ public class Menu {
             System.out.println("""
                 -- Llistar Llibres --
                 1. Tots
-                2. En préstec
+                2. En prestec
                 3. Per autor
-                4. Cercar títol
-                0. Tornar al menú de llibres
-                Escull una opció: """);
+                4. Cercar titol
+                0. Tornar al menu de llibres
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optListarLibros = scanner.nextInt();
 
@@ -136,10 +136,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optListarLibros = -1;
             }
@@ -155,8 +155,8 @@ public class Menu {
                 -- Modificar Llibres --
                 1. Titol
                 2. Autor
-                0. Tornar al menú de llibres
-                Escull una opció: """);
+                0. Tornar al menu de llibres
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optModificarLibros = scanner.nextInt();
 
@@ -169,10 +169,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optModificarLibros = -1;
             }
@@ -185,13 +185,13 @@ public class Menu {
 
         do {
             System.out.println("""
-                -- Gestió d'usuaris --
+                -- Gestio d'usuaris --
                 1. Afegir
                 2. Modificar
                 3. Eliminar
                 4. Llistar
-                0. Tornar al menú principal
-                Escull una opció: """);
+                0. Tornar al menu principal
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optUsuarios = scanner.nextInt();
 
@@ -212,10 +212,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un número valid.\n");
                 scanner.next();
                 optUsuarios = -1;
             }
@@ -231,9 +231,9 @@ public class Menu {
                 -- Modificar Usuari --
                 1. Nom
                 2. Cognom
-                3. Telèfon
-                0. Tornar al menú d'usuaris
-                Escull una opció: """);
+                3. Telefon
+                0. Tornar al menu d'usuaris
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optModificarUsuario = scanner.nextInt();
 
@@ -250,10 +250,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optModificarUsuario = -1;
             }
@@ -269,8 +269,8 @@ public class Menu {
                 -- Modificar Cognoms --
                 1. Primer cognom
                 2. Segon cognom
-                0. Tornar al menú d'usuaris
-                Escull una opció: """);
+                0. Tornar al menu d'usuaris
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optListarUsuaris = scanner.nextInt();
 
@@ -283,10 +283,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optListarUsuaris = -1;
             }
@@ -301,10 +301,10 @@ public class Menu {
             System.out.println("""
                 -- Llistar Usuaris --
                 1. Tots
-                2. Usuaris amb préstecs actius
-                3. Usuaris amb préstecs fora de termini
-                0. Tornar al menú d'usuaris
-                Escull una opció: """);
+                2. Usuaris amb prestecs actius
+                3. Usuaris amb prestecs fora de termini
+                0. Tornar al menu d'usuaris
+                Escull una opcio: """);
             if (scanner.hasNextInt()) {
                 optListarLibros = scanner.nextInt();
 
@@ -319,10 +319,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optListarLibros = -1;
             }
@@ -334,10 +334,10 @@ public class Menu {
         
         do { 
             System.out.println("""
-                -- Gestionar Préstecs --
+                -- Gestionar Prestecs --
                 1. Agafar un nou llibre
                 2. Retornar un llibre
-                0. Tornar al menú principal
+                0. Tornar al menu principal
                     """);
             if (scanner.hasNextInt()){
                 optPrestecs = scanner.nextInt();
@@ -355,10 +355,10 @@ public class Menu {
                         limpiarPantalla();
                         break;
                     default:
-                        System.out.println("Opció no vàlida. Torna-ho a intentar.\n");
+                        System.out.println("Opcio no valida. Torna-ho a intentar.\n");
                 }
             } else {
-                System.out.println("Si us plau, ingressa un número vàlid.\n");
+                System.out.println("Si us plau, ingressa un numero valid.\n");
                 scanner.next();
                 optPrestecs = -1;
             }
