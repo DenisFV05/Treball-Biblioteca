@@ -110,109 +110,83 @@ public class Usuari {
         return maxId + 1; // Devuelve una id nueva
     }
 
-    // Modificar un usuari existent
     public static void modificarUsuari() {
-        Scanner scanner = new Scanner(System.in); // Abrir input
+        Scanner scanner = new Scanner(System.in); // Abrir el input
         try {
-            String filePathUsuaris = "./src/main/json/usuaris.json";
-            String contentUsuaris = new String(Files.readAllBytes(Paths.get(filePathUsuaris)));
-            JSONArray jsonArrayUsuaris = new JSONArray(contentUsuaris);
+            // Leer JSON de usuarios
+            JSONArray usuaris = llegirFitxerJson();
     
-            /////////////////////////////////// [ LISTADO DE USUARIOS Y PODER ESCOGERLO ] ///////////////////////////////
-    
-            // Header de la lista de usuarios
-            System.out.println("\nID    | Nom            | Cognoms             | Teléfon");
+            // Mostrar lista de usuarios
+            System.out.println("\nID    | Nom            | Cognoms             | Telèfon");
             System.out.println("--------------------------------------------------------");
-    
-            // Iterar los usuarios
-            for (int i = 0; i < jsonArrayUsuaris.length(); i++) {
-                JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
-    
-                // Dar formato a las variables de los usuarios
+            for (int i = 0; i < usuaris.length(); i++) {
+                JSONObject usuari = usuaris.getJSONObject(i);
                 int idUsuari = usuari.getInt("idUsuari");
                 String nom = usuari.getString("nom");
                 String cognoms = usuari.getString("cognoms");
-                int telefon = usuari.getInt("telefon");
+                String telefon = usuari.get("telefon").toString();
     
-                // Imprimir los datos de los usuarios
-                System.out.printf("%-6d| %-15s| %-20s| %-10d%n", idUsuari, nom, cognoms, telefon);
+                System.out.printf("%-6d| %-15s| %-20s| %-10s%n", idUsuari, nom, cognoms, telefon);
             }
     
-            // Solicitar el ID y verificar el Input
-            int selectUsuariId = -1; // Se añade un valor no valido para que salte el comprobante
-            boolean inputValido = false;
-            while (!inputValido) {
-                System.out.println("\nIntrodueix l'ID d'un usuari per seleccionar-lo: ");
-                try {
-                    selectUsuariId = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el salto de línea pendiente
-                    inputValido = true; // Si el selectUsuariId es un (int) es = true
-                } catch (Exception e) {
-                    System.out.println("Error: Has d'introduir un número vàlid per seleccionar l'usuari.");
-                    scanner.nextLine(); // Limpiar el salto de línea
-                }
-            }
+            // Pedir el ID del usuario a modificar
+            System.out.print("\nIntrodueix l'ID d'un usuari per modificar-lo: ");
+            int selectUsuariId = Integer.parseInt(scanner.nextLine().trim());
     
-            // Buscar el usuario con el ID seleccionado
+            // Buscar el usuario por ID
             JSONObject usuariSeleccionat = null;
-            for (int i = 0; i < jsonArrayUsuaris.length(); i++) {
-                JSONObject usuari = jsonArrayUsuaris.getJSONObject(i);
+            for (int i = 0; i < usuaris.length(); i++) {
+                JSONObject usuari = usuaris.getJSONObject(i);
                 if (usuari.getInt("idUsuari") == selectUsuariId) {
                     usuariSeleccionat = usuari;
                     break;
                 }
             }
     
-            if (usuariSeleccionat != null) { // Si se encuentra el usuario
-                // Modificar los datos del usuario
-    
-                // Leer y decidir si modificar el nombre
-                System.out.print("Introdueix el nou nom (deixa en blanc per mantenir el valor actual): ");
-                String nouNom = scanner.nextLine().trim();
-                if (!nouNom.isEmpty()) { // Si se pone algo, se valida y cambia
-                    nouNom = validarNom(scanner); // Validar el nuevo nombre
-                    usuariSeleccionat.put("nom", nouNom);
-                }
-    
-                // Leer y decidir si modificar el primer apellido
-                System.out.print("Introdueix el nou primer cognom (deixa en blanc per mantenir el valor actual): ");
-                String nouPrimerCognom = scanner.nextLine().trim();
-                if (!nouPrimerCognom.isEmpty()) { // Si se pone algo, se valida y cambia
-                    nouPrimerCognom = validarNom(scanner); // Validar el primer apellido
-                    String segonCognom = usuariSeleccionat.getString("cognoms").split(" ")[1]; // Obtener el segundo apellido
-                    usuariSeleccionat.put("cognoms", nouPrimerCognom + " " + segonCognom); // Modificar solo el primer apellido
-                }
-    
-                // Leer y decidir si modificar el segundo apellido
-                System.out.print("Introdueix el nou segon cognom (deixa en blanc per mantenir el valor actual): ");
-                String nouSegonCognom = scanner.nextLine().trim();
-                if (!nouSegonCognom.isEmpty()) { // Si se pone algo, se valida y cambia
-                    nouSegonCognom = validarNom(scanner); // Validar el segundo apellido
-                    String primerCognom = usuariSeleccionat.getString("cognoms").split(" ")[0]; // Obtener el primer apellido
-                    usuariSeleccionat.put("cognoms", primerCognom + " " + nouSegonCognom); // Modificar solo el segundo apellido
-                }
-    
-                // Leer y decidir si modificar el teléfono
-                System.out.print("Introdueix el nou telèfon (deixa en blanc per mantenir el valor actual): ");
-                String nouTelefon = scanner.nextLine().trim();
-                if (!nouTelefon.isEmpty()) { // Si se pone algo, se valida y cambia
-                    nouTelefon = validarTelefon(scanner); // Validar el teléfono
-                    usuariSeleccionat.put("telefon", nouTelefon);
-                }
-    
-                // Guardar los cambios en el archivo
-                escriureFitxerJson(jsonArrayUsuaris); // Guardar los cambios
-    
-                System.out.println("Usuari modificat correctament.");
-            } else {
+            if (usuariSeleccionat == null) {
                 System.out.println("Usuari no trobat.");
+                return;
             }
     
+            // Modificar los datos del usuario
+            System.out.println("Modificant l'usuari amb ID: " + selectUsuariId);
+    
+            // Leer y decidir si modificar el nombre
+            System.out.print("Introdueix el nou nom (deixa en blanc per mantenir el valor actual): ");
+            String nouNom = scanner.nextLine().trim();
+            if (!nouNom.isEmpty()) {
+                nouNom = validarNom(scanner); // Solo validamos si no está vacío
+                usuariSeleccionat.put("nom", nouNom);
+            }
+    
+            // Leer y decidir si modificar los apellidos
+            System.out.print("Introdueix els nous cognoms (deixa en blanc per mantenir el valor actual): ");
+            String nousCognoms = scanner.nextLine().trim();
+            if (!nousCognoms.isEmpty()) {
+                usuariSeleccionat.put("cognoms", nousCognoms);
+            }
+    
+            // Leer y decidir si modificar el teléfono
+            System.out.print("Introdueix el nou telèfon (deixa en blanc per mantenir el valor actual): ");
+            String nouTelefon = scanner.nextLine().trim();
+            if (!nouTelefon.isEmpty()) {
+                nouTelefon = validarTelefon(scanner); // Solo validamos si no está vacío
+                usuariSeleccionat.put("telefon", nouTelefon);
+            }
+    
+            // Guardar los cambios en el archivo JSON
+            escriureFitxerJson(usuaris);
+            System.out.println("Usuari modificat correctament.");
         } catch (Exception e) {
             System.out.println("Error en modificar l'usuari: " + e.getMessage());
+        } finally {
+            // no se cierra el scanner
         }
-        // No cerrar el scanner aquí
     }
+    
+    
+    
+    
     
     
     
